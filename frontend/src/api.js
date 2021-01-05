@@ -13,7 +13,7 @@ export async function logInGetToken(username, password) {
         password: password,
     });
 
-    const response = await fetch("/login/token", {
+    const response = await fetch("/api/login/token", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -28,7 +28,7 @@ export async function logInGetToken(username, password) {
 }
 
 export async function signup(username, password) {
-    const response = await fetch("/users", {
+    const response = await fetch("/api/users", {
         method: "POST",
         body: JSON.stringify({ username, password }),
     });
@@ -40,7 +40,7 @@ export async function signup(username, password) {
 }
 
 export async function testToken() {
-    const response = await fetch("/login/test-token", {
+    const response = await fetch("/api/login/test-token", {
         method: "POST",
         headers: getAuthHeaders(),
     });
@@ -48,7 +48,7 @@ export async function testToken() {
 }
 
 export async function getLinks() {
-    const response = await fetch("/links", {
+    const response = await fetch("/api/links", {
         headers: getAuthHeaders(),
     });
     const json = await response.json();
@@ -56,7 +56,7 @@ export async function getLinks() {
 }
 
 export async function getLiked() {
-    const response = await fetch("/links/liked", {
+    const response = await fetch("/api/links/liked", {
         headers: getAuthHeaders(),
     });
     const json = await response.json();
@@ -64,7 +64,7 @@ export async function getLiked() {
 }
 
 export async function getLink(link_id) {
-    const response = await fetch(`/links/${link_id}`, {
+    const response = await fetch(`/api/links/${link_id}`, {
         headers: getAuthHeaders(),
     });
     const json = await response.json();
@@ -72,7 +72,7 @@ export async function getLink(link_id) {
 }
 
 export async function addLink(url) {
-    await fetch("/links", {
+    await fetch("/api/links", {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({ url }),
@@ -80,14 +80,14 @@ export async function addLink(url) {
 }
 
 export async function deleteLink(link_id) {
-    await fetch(`/links/${link_id}`, {
+    await fetch(`/api/links/${link_id}`, {
         method: "DELETE",
         headers: getAuthHeaders(),
     });
 }
 
 export async function toggleLiked(link_id) {
-    await fetch(`/links/${link_id}/toggle_liked`, {
+    await fetch(`/api/links/${link_id}/toggle_liked`, {
         method: "POST",
         headers: getAuthHeaders(),
     });
