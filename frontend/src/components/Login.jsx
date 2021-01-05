@@ -65,7 +65,10 @@ class Login extends Component {
     render() {
         return (
             <div className="flex h-screen">
-                <div className="flex flex-col w-80 gap-y-5 px-8 pt-6 pb-8 m-auto border-2 bg-white rounded-2xl shadow-md w-72">
+                <form
+                    className="flex flex-col w-80 gap-y-5 px-8 pt-6 pb-8 m-auto border-2 bg-white rounded-2xl shadow-md w-72"
+                    onSubmit={this.handleLogin}
+                >
                     <input
                         className="w-full text-gray-darker placeholder-gray-700 px-3 py-2 rounded-lg appearance-none border border-gray-400 focus:border-blue-500"
                         id="username"
@@ -90,13 +93,11 @@ class Login extends Component {
                         </div>
                     )}
                     <div className="flex items-center justify-between">
-                        <button
+                        <input
                             className="px-4 py-2 font-bold text-white bg-gray-900 hover:bg-blue-500 rounded-lg hover:bg-blue-400"
-                            type="button"
-                            onClick={this.handleLogin}
-                        >
-                            Sign In
-                        </button>
+                            type="submit"
+                            value="Sign In"
+                        ></input>
                         <button
                             className="px-4 py-2 font-bold text-white bg-gray-900 hover:bg-blue-500 rounded-lg hover:bg-blue-400"
                             type="button"
@@ -105,7 +106,7 @@ class Login extends Component {
                             Sign Up
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         );
     }

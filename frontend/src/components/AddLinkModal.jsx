@@ -41,19 +41,20 @@ export default function AddLinkModal(props) {
                         onClick={props.onRequestClose}
                     />
                 </div>
-                <input
-                    className="flex-grow border rounded w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
-                    type="url"
-                    placeholder="Enter URL"
-                    autoFocus={true}
-                    onChange={(event) => setUrl(event.target.value)}
-                ></input>
-                <button
-                    className="text-white h-full bg-gray-900 hover:bg-blue-500 px-8 py-2 ml-4 rounded"
-                    onClick={addLink_}
-                >
-                    Add
-                </button>
+                <form onSubmit={addLink_}>
+                    <input
+                        className="flex-grow border rounded w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
+                        type="url"
+                        placeholder="Enter URL"
+                        autoFocus={true}
+                        onChange={(event) => setUrl(event.target.value)}
+                    ></input>
+                    <input
+                        className="text-white h-full bg-gray-900 hover:bg-blue-500 px-8 py-2 ml-4 rounded"
+                        type="submit"
+                        value="Add"
+                    ></input>
+                </form>
             </>
         </Modal>
     );
