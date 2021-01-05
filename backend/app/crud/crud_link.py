@@ -1,0 +1,23 @@
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session
+
+from app.models import Link
+from app.schemas import LinkCreate, LinkUpdate
+
+from .base import CRUDBase
+
+
+class CRUDLink(CRUDBase[Link, LinkCreate, LinkUpdate]):
+    def create(self, db: Session, link_in: LinkCreate) -> Link:
+        obj = self.model(**jsonable_encoder(link_in), title=link_in.url)
+        db.add(obj)
+        db.commit()
+        db.refresh(obj)
+        return obj
+
+    def toggle_liked(self, db: Session, *, link: Link) -> None:
+        link.liked = not link.liked
+        db.commit()
+
+
+link = CRUDLink(Link)
