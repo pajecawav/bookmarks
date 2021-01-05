@@ -19,8 +19,6 @@ export default class Sidebar extends Component {
     }
 
     render() {
-        console.log("SIDEBAR RENDERING");
-
         const toggable_styles = this.state.hidden ? "-translate-x-48" : "";
 
         return (

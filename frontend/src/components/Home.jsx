@@ -12,9 +12,11 @@ export default class Home extends Component {
         this.state = {
             sidebar_hidden: false,
             links: [],
+            extendable_list: false,
         };
 
         this.fetchLinks = this.fetchLinks.bind(this);
+        this.addLink = this.addLink.bind(this);
     }
 
     componentDidMount() {
@@ -24,13 +26,26 @@ export default class Home extends Component {
     fetchLinks() {
         if (this.location === "/liked") {
             getLiked().then((links) => {
-                this.setState({ links: links });
+                this.setState({ links: links, extendable_list: false });
             });
         } else {
             getLinks().then((links) => {
-                this.setState({ links: links });
+                this.setState({ links: links, extendable_list: true });
             });
         }
+    }
+
+    addLink(link) {
+        if (!this.state.extendable_list) {
+            return;
+        }
+
+        let new_links = [link];
+        this.setState({
+            links: this.state.links
+                ? new_links.concat(this.state.links)
+                : new_links,
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -57,6 +72,7 @@ export default class Home extends Component {
                                 sidebar_hidden: !this.state.sidebar_hidden,
                             })
                         }
+                        onAddLink={this.addLink}
                     />
                     <LinkList links={this.state.links}></LinkList>
                 </div>

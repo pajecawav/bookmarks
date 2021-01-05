@@ -72,11 +72,13 @@ export async function getLink(link_id) {
 }
 
 export async function addLink(url) {
-    await fetch("/api/links", {
+    const response = await fetch("/api/links", {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({ url }),
     });
+    const json = await response.json();
+    return json;
 }
 
 export async function deleteLink(link_id) {

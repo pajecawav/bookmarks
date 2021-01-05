@@ -21,9 +21,11 @@ const customStyles = {
 export default function AddLinkModal(props) {
     let [url, setUrl] = useState(null);
 
-    let addLink_ = () => {
-        addLink(url);
+    let addLink_ = async (event) => {
+        event.preventDefault();
+        let link = await addLink(url);
         props.onRequestClose();
+        props.onAddLink(link);
     };
 
     return (

@@ -35,6 +35,7 @@ export default function Topbar(props) {
             <AddLinkModal
                 isOpen={addingLink}
                 onRequestClose={() => setAddingLink(false)}
+                onAddLink={props.onAddLink}
             />
         </div>
     );
