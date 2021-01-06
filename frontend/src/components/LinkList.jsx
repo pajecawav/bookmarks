@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import LinkCard from "./LinkCard";
+import { ReactComponent as SpinnerIcon } from "../icons/spinner.svg";
 
 export default function LinkList(props) {
     const loader = useRef(null);
@@ -30,7 +31,9 @@ export default function LinkList(props) {
     return (
         <div>
             <div className="flex flex-col my-4 px-4 overflow-auto">{cards}</div>
-            {props.load_on_scroll && <div className="h-28" ref={loader}></div>}
+            {props.load_on_scroll && (
+                <SpinnerIcon className="animate-spin m-auto" ref={loader} />
+            )}
         </div>
     );
 }
