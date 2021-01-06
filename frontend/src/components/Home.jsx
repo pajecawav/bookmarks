@@ -8,12 +8,11 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.location = props.location.pathname;
+        this.offset = 0;
 
         this.state = {
             sidebar_hidden: false,
             links: [],
-            extendable_list: false,
-            offset: 0,
             load_on_scroll: true,
         };
 
@@ -22,19 +21,13 @@ export default class Home extends Component {
         this._extendLinks = this._extendLinks.bind(this);
     }
 
-    componentDidMount() {
-        if (this.location === "/") {
-            this.setState({ extendable_list: true });
-        }
-    }
-
     fetchLinks() {
         if (this.location === "/liked") {
-            getLiked(this.state.offset).then(this._extendLinks);
+            getLiked(this.offset).then(this._extendLinks);
         } else if (this.location === "/archived") {
-            getArchived(this.state.offset).then(this._extendLinks);
+            getArchived(this.offset).then(this._extendLinks);
         } else {
-            getLinks(this.state.offset).then(this._extendLinks);
+            getLinks(this.offset).then(this._extendLinks);
         }
     }
 
@@ -42,13 +35,13 @@ export default class Home extends Component {
         let all_links = this.state.links.concat(links);
         this.setState({
             links: all_links,
-            offset: all_links.length,
             load_on_scroll: links.length !== 0,
         });
+        this.offset = all_links.length;
     }
 
     addLink(link) {
-        if (!this.state.extendable_list) {
+        if (this.location !== "/") {
             return;
         }
 
@@ -63,6 +56,8 @@ export default class Home extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.location) {
             this.location = nextProps.location.pathname;
+            this.setState({ links: [], load_on_scroll: false });
+            this.offset = 0;
             this.fetchLinks();
         }
     }

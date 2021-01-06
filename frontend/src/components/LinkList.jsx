@@ -8,13 +8,13 @@ export default function LinkList(props) {
         let options = {
             root: null,
             rootMargin: "20px",
-            // threshold: 1.0,
         };
         const observer = new IntersectionObserver(handleObserver, options);
         if (loader.current) {
             observer.observe(loader.current);
         }
-    }, []);
+        return () => observer.disconnect();
+    });
 
     const handleObserver = (entities) => {
         const target = entities[0];
