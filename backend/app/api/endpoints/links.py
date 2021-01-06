@@ -47,7 +47,7 @@ def get_links(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    return current_user.links
+    return current_user.links.filter(~models.Link.archived).all()
 
 
 @router.get("/liked", response_model=List[schemas.Link])
@@ -55,7 +55,15 @@ def get_liked(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    return [link for link in current_user.links if link.liked]
+    return current_user.links.filter(models.Link.liked).all()
+
+
+@router.get("/archived", response_model=List[schemas.Link])
+def get_archived(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    return current_user.links.filter(models.Link.archived).all()
 
 
 @router.get("/{link_id}", response_model=schemas.Link)
@@ -103,4 +111,14 @@ def toggle_liked(
     link: models.Link = Depends(get_requested_link),
 ):
     crud.link.toggle_liked(db, link=link)
+    return {"status": "success"}
+
+
+@router.post("/{link_id}/toggle_archived")
+def toggle_archived(
+    db: Session = Depends(dependencies.get_db),
+    link: models.Link = Depends(get_requested_link),
+):
+    crud.link.toggle_archived(db, link=link)
+    print(link.archived)
     return {"status": "success"}

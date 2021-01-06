@@ -19,5 +19,9 @@ class CRUDLink(CRUDBase[Link, LinkCreate, LinkUpdate]):
         link.liked = not link.liked
         db.commit()
 
+    def toggle_archived(self, db: Session, *, link: Link) -> None:
+        link.archived = not link.archived
+        db.commit()
+
 
 link = CRUDLink(Link)

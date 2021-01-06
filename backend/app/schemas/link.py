@@ -13,6 +13,7 @@ class Link(BaseModel):
     url: str
     title: str
     liked: bool
+    archived: bool
     date_added: datetime
 
     class Config:

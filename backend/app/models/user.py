@@ -12,5 +12,5 @@ class User(Base):
     password_hashed = Column(String, nullable=False)
 
     links = relationship(
-        "Link", back_populates="user", order_by="desc(Link.date_added)"
+        "Link", back_populates="user", lazy="dynamic", order_by="desc(Link.date_added)"
     )
