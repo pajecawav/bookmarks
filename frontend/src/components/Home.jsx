@@ -23,7 +23,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        if (this.location === "/liked") {
+        if (this.location === "/") {
             this.setState({ extendable_list: true });
         }
     }
