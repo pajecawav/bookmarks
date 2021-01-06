@@ -49,6 +49,7 @@ export default function AddLinkModal(props) {
                         type="url"
                         placeholder="Enter URL"
                         autoFocus={true}
+                        required
                         onChange={(event) => setUrl(event.target.value)}
                     ></input>
                     <input
