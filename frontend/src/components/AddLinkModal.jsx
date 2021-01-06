@@ -20,12 +20,17 @@ const customStyles = {
 
 export default function AddLinkModal(props) {
     let [url, setUrl] = useState(null);
+    let [errors, setErrors] = useState(null);
 
     let addLink_ = async (event) => {
         event.preventDefault();
-        let link = await addLink(url);
-        props.onRequestClose();
-        props.onAddLink(link);
+        let result = await addLink(url);
+        if (result.ok) {
+            props.onRequestClose();
+            props.onAddLink(result.link);
+        } else {
+            setErrors(result.error.map((e) => e.msg));
+        }
     };
 
     return (
@@ -58,6 +63,16 @@ export default function AddLinkModal(props) {
                         value="Add"
                     ></input>
                 </form>
+
+                {errors &&
+                    errors.map((error) => (
+                        <div
+                            className="bg-red-200 text-red-800 border border-red-800 px-4 py-2 mt-2 rounded-md"
+                            key={error}
+                        >
+                            {error}
+                        </div>
+                    ))}
             </>
         </Modal>
     );

@@ -86,7 +86,10 @@ export async function addLink(url) {
         body: JSON.stringify({ url }),
     });
     const json = await response.json();
-    return json;
+    if (response.ok) {
+        return { ok: true, link: json };
+    }
+    return { ok: false, error: json.detail };
 }
 
 export async function deleteLink(link_id) {
