@@ -18,7 +18,7 @@ html {
 
 body {
     margin: 0;
-    font-family: LyonText, "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+    font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 0.02em;
@@ -42,9 +42,4 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background-color: lightgrey;
     border-radius: 20px;
-}
-
-@font-face {
-    font-family: LyonText;
-    src: local("LyonText"), url(./fonts/LyonText.otf) format("opentype");
 }
