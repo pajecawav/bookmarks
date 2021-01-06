@@ -20,7 +20,7 @@ export default function LinkCard(props) {
     return (
         <div className="flex flex-col min-h-full pb-4 mb-4 flex-grow border-b-2">
             <a
-                className="text-xl cursor-pointer hover:text-blue-500 mb-1"
+                className="text-xl cursor-pointer hover:text-blue-500 mb-1 overflow-ellipsis overflow-hidden whitespace-nowrap"
                 href={props.url}
                 target="_blank"
                 rel="noopener noreferrer"
