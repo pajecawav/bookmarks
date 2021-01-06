@@ -13,30 +13,38 @@ export default class Home extends Component {
             sidebar_hidden: false,
             links: [],
             extendable_list: false,
+            offset: 0,
+            load_on_scroll: true,
         };
 
         this.fetchLinks = this.fetchLinks.bind(this);
         this.addLink = this.addLink.bind(this);
+        this._extendLinks = this._extendLinks.bind(this);
     }
 
     componentDidMount() {
-        this.fetchLinks();
+        if (this.location === "/liked") {
+            this.setState({ extendable_list: true });
+        }
     }
 
     fetchLinks() {
         if (this.location === "/liked") {
-            getLiked().then((links) => {
-                this.setState({ links: links, extendable_list: false });
-            });
+            getLiked(this.state.offset).then(this._extendLinks);
         } else if (this.location === "/archived") {
-            getArchived().then((links) => {
-                this.setState({ links: links, extendable_list: false });
-            });
+            getArchived(this.state.offset).then(this._extendLinks);
         } else {
-            getLinks().then((links) => {
-                this.setState({ links: links, extendable_list: true });
-            });
+            getLinks(this.state.offset).then(this._extendLinks);
         }
+    }
+
+    _extendLinks(links) {
+        let all_links = this.state.links.concat(links);
+        this.setState({
+            links: all_links,
+            offset: all_links.length,
+            load_on_scroll: links.length !== 0,
+        });
     }
 
     addLink(link) {
@@ -78,7 +86,11 @@ export default class Home extends Component {
                         }
                         onAddLink={this.addLink}
                     />
-                    <LinkList links={this.state.links}></LinkList>
+                    <LinkList
+                        links={this.state.links}
+                        fetchMore={this.fetchLinks}
+                        load_on_scroll={this.state.load_on_scroll}
+                    ></LinkList>
                 </div>
             </div>
         );

@@ -47,24 +47,24 @@ export async function testToken() {
     return response.ok;
 }
 
-export async function getLinks() {
-    const response = await fetch("/api/links", {
+export async function getLinks(offset = 0) {
+    const response = await fetch(`/api/links?offset=${offset}`, {
         headers: getAuthHeaders(),
     });
     const json = await response.json();
     return json;
 }
 
-export async function getLiked() {
-    const response = await fetch("/api/links/liked", {
+export async function getLiked(offset = 0) {
+    const response = await fetch(`/api/links/liked?offset=${offset}`, {
         headers: getAuthHeaders(),
     });
     const json = await response.json();
     return json;
 }
 
-export async function getArchived() {
-    const response = await fetch("/api/links/archived", {
+export async function getArchived(offset = 0) {
+    const response = await fetch(`/api/links/archived?offset=${offset}`, {
         headers: getAuthHeaders(),
     });
     const json = await response.json();
