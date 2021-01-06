@@ -39,7 +39,9 @@ export default function LinkCard(props) {
             <div className="flex gap-2 mt-3">
                 <HeartIcon
                     className={`cursor-pointer rounded ${
-                        liked ? "fill-current text-black" : "hover:fill-blue"
+                        liked
+                            ? "fill-current text-black"
+                            : "hover:fill-blue hover:stroke-blue"
                     }`}
                     alt="toggle liked"
                     onClick={() => {
@@ -52,7 +54,7 @@ export default function LinkCard(props) {
                     className={`cursor-pointer rounded ${
                         props.archived
                             ? "fill-current text-black"
-                            : "hover:fill-blue"
+                            : "hover:fill-blue hover:stroke-blue"
                     }`}
                     alt="archive"
                     onClick={() => {
