@@ -106,7 +106,6 @@ def delete_link(
 
 @router.post("/{link_id}/toggle_liked")
 def toggle_liked(
-    link_id: int,
     db: Session = Depends(dependencies.get_db),
     link: models.Link = Depends(get_requested_link),
 ):
@@ -120,5 +119,4 @@ def toggle_archived(
     link: models.Link = Depends(get_requested_link),
 ):
     crud.link.toggle_archived(db, link=link)
-    print(link.archived)
     return {"status": "success"}

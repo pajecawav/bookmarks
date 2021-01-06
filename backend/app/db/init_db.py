@@ -9,7 +9,4 @@ def init_db(db: Session) -> None:
 
 
 if __name__ == "__main__":
-    # if os.path.exists(settings.DATABASE_URL):
-    #     os.remove(settings.DATABASE_URL)
-
     init_db(SessionLocal())
