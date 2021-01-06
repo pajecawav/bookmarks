@@ -2,7 +2,7 @@ import { Component } from "react";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import LinkList from "./LinkList";
-import { getLiked, getLinks } from "../api";
+import { getLiked, getLinks, getArchived } from "../api";
 
 export default class Home extends Component {
     constructor(props) {
@@ -26,6 +26,10 @@ export default class Home extends Component {
     fetchLinks() {
         if (this.location === "/liked") {
             getLiked().then((links) => {
+                this.setState({ links: links, extendable_list: false });
+            });
+        } else if (this.location === "/archived") {
+            getArchived().then((links) => {
                 this.setState({ links: links, extendable_list: false });
             });
         } else {

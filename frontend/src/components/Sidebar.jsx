@@ -39,9 +39,12 @@ export default class Sidebar extends Component {
                     >
                         Liked
                     </Link>
-                    <div className="cursor-pointer hover:text-blue-500">
+                    <Link
+                        className="cursor-pointer hover:text-blue-500"
+                        to="/archived"
+                    >
                         Archive
-                    </div>
+                    </Link>
                 </div>
             </div>
         );

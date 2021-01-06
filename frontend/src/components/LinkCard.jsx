@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { toggleLiked, deleteLink } from "../api";
+import { toggleLiked, deleteLink, toggleArchived } from "../api";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
@@ -49,10 +49,16 @@ export default function LinkCard(props) {
                 />
 
                 <ArchiveIcon
-                    className="cursor-pointer rounded hover:fill-blue"
+                    className={`cursor-pointer rounded ${
+                        props.archived
+                            ? "fill-current text-black"
+                            : "hover:fill-blue"
+                    }`}
                     alt="archive"
                     onClick={() => {
-                        // TODO: implement archiving links
+                        toggleArchived(props.id);
+                        // TODO: delete link from the list instead of hiding it
+                        setVisible(false);
                     }}
                 />
 

@@ -63,6 +63,14 @@ export async function getLiked() {
     return json;
 }
 
+export async function getArchived() {
+    const response = await fetch("/api/links/archived", {
+        headers: getAuthHeaders(),
+    });
+    const json = await response.json();
+    return json;
+}
+
 export async function getLink(link_id) {
     const response = await fetch(`/api/links/${link_id}`, {
         headers: getAuthHeaders(),
@@ -90,6 +98,13 @@ export async function deleteLink(link_id) {
 
 export async function toggleLiked(link_id) {
     await fetch(`/api/links/${link_id}/toggle_liked`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+    });
+}
+
+export async function toggleArchived(link_id) {
+    await fetch(`/api/links/${link_id}/toggle_archived`, {
         method: "POST",
         headers: getAuthHeaders(),
     });
