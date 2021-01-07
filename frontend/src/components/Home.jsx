@@ -58,7 +58,7 @@ export default class Home extends Component {
     resetLinks() {
         this.setState({
             links: [],
-            load_on_scroll: false,
+            load_on_scroll: !this.searching,
             searchbar_hidden: !this.searching,
         });
         this.updateQueryParams();
@@ -79,10 +79,6 @@ export default class Home extends Component {
             this.searching = this.location === "/search";
             this.updateQueryParams();
             this.resetLinks();
-
-            if (!this.searching) {
-                this.fetchLinks();
-            }
         }
     }
 
@@ -119,7 +115,7 @@ export default class Home extends Component {
                         />
                     )}
                     {no_links && !this.searching && (
-                        <div className="h-48 flex items-center justify-center border-b">
+                        <div className="h-48 mx-4 flex items-center justify-center border-b">
                             <h1 className="text-gray-500 text-xl">No links.</h1>
                         </div>
                     )}
