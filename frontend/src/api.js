@@ -1,5 +1,10 @@
 import { getLocalToken } from "./utils";
 
+const encodeGetParams = (p) =>
+    Object.entries(p)
+        .map((kv) => kv.map(encodeURIComponent).join("="))
+        .join("&");
+
 function getAuthHeaders() {
     let token = getLocalToken();
     return {
@@ -47,24 +52,8 @@ export async function testToken() {
     return response.ok;
 }
 
-export async function getLinks(offset = 0) {
-    const response = await fetch(`/api/links?offset=${offset}`, {
-        headers: getAuthHeaders(),
-    });
-    const json = await response.json();
-    return json;
-}
-
-export async function getLiked(offset = 0) {
-    const response = await fetch(`/api/links/liked?offset=${offset}`, {
-        headers: getAuthHeaders(),
-    });
-    const json = await response.json();
-    return json;
-}
-
-export async function getArchived(offset = 0) {
-    const response = await fetch(`/api/links/archived?offset=${offset}`, {
+export async function getLinks(params = {}) {
+    const response = await fetch(`/api/links?${encodeGetParams(params)}`, {
         headers: getAuthHeaders(),
     });
     const json = await response.json();

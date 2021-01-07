@@ -44,44 +44,22 @@ def fetch_link_title(link: models.Link, db: Session) -> None:
 
 @router.get("", response_model=List[schemas.Link])
 def get_links(
+    liked: Optional[bool] = None,
+    archived: Optional[bool] = None,
     offset: int = 0,
     limit: int = 20,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    return (
-        current_user.links.filter(~models.Link.archived)
-        .offset(offset)
-        .limit(limit)
-        .all()
-    )
+    links = current_user.links
 
+    if liked is not None:
+        links = links.filter(models.Link.liked == liked)
 
-@router.get("/liked", response_model=List[schemas.Link])
-def get_liked(
-    offset: int = 0,
-    limit: int = 20,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-):
-    return (
-        current_user.links.filter(models.Link.liked).offset(offset).limit(limit).all()
-    )
+    if archived is not None:
+        links = links.filter(models.Link.archived == archived)
 
-
-@router.get("/archived", response_model=List[schemas.Link])
-def get_archived(
-    offset: int = 0,
-    limit: int = 20,
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(get_current_user),
-):
-    return (
-        current_user.links.filter(models.Link.archived)
-        .offset(offset)
-        .limit(limit)
-        .all()
-    )
+    return links.offset(offset).limit(limit).all()
 
 
 @router.get("/{link_id}", response_model=schemas.Link)
