@@ -91,6 +91,8 @@ export default class Home extends Component {
             ? "ml-0"
             : "sm:ml-48 sm:translate-x-0 ml-0 translate-x-48";
 
+        const no_links = !this.state.links.length && !this.state.load_on_scroll;
+
         return (
             <div className="flex max-w-3xl m-auto">
                 <Sidebar hidden={this.state.sidebar_hidden} />
@@ -115,6 +117,11 @@ export default class Home extends Component {
                                 this.fetchLinks();
                             }}
                         />
+                    )}
+                    {no_links && !this.searching && (
+                        <div className="h-48 flex items-center justify-center border-b">
+                            <h1 className="text-gray-500 text-xl">No links.</h1>
+                        </div>
                     )}
                     <LinkList
                         links={this.state.links}
