@@ -70,6 +70,8 @@ export default class Home extends Component {
             this.query_params["liked"] = true;
         } else if (this.location === "/archived") {
             this.query_params["archived"] = true;
+        } else if (this.location !== "/search") {
+            this.query_params["archived"] = false;
         }
     }
 
