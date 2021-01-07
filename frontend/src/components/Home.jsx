@@ -2,24 +2,28 @@ import { Component } from "react";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
 import LinkList from "./LinkList";
+import SearchBar from "./SearchBar";
 import { getLinks } from "../api";
-
-const media_query = window.matchMedia("(min-width: 640px)");
+import { media_query } from "../utils";
 
 export default class Home extends Component {
     constructor(props) {
         super(props);
         this.location = props.location.pathname;
 
+        this.searching = this.location === "/search";
+
         this.state = {
             sidebar_hidden: !media_query.matches,
+            searchbar_hidden: !this.searching,
             links: [],
-            load_on_scroll: true,
+            load_on_scroll: !this.searching,
         };
 
         this.fetchLinks = this.fetchLinks.bind(this);
         this.addLink = this.addLink.bind(this);
         this._extendLinks = this._extendLinks.bind(this);
+        this.resetLinks = this.resetLinks.bind(this);
         this.updateQueryParams = this.updateQueryParams.bind(this);
 
         this.updateQueryParams();
@@ -51,23 +55,34 @@ export default class Home extends Component {
         });
     }
 
+    resetLinks() {
+        this.setState({
+            links: [],
+            load_on_scroll: false,
+            searchbar_hidden: !this.searching,
+        });
+        this.updateQueryParams();
+    }
+
     updateQueryParams() {
         this.query_params = { offset: 0 };
         if (this.location === "/liked") {
             this.query_params["liked"] = true;
         } else if (this.location === "/archived") {
             this.query_params["archived"] = true;
-        } else {
-            this.query_params["archived"] = false;
         }
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.location.pathname !== this.location) {
             this.location = nextProps.location.pathname;
+            this.searching = this.location === "/search";
             this.updateQueryParams();
-            this.setState({ links: [], load_on_scroll: false });
-            this.fetchLinks();
+            this.resetLinks();
+
+            if (!this.searching) {
+                this.fetchLinks();
+            }
         }
     }
 
@@ -90,6 +105,17 @@ export default class Home extends Component {
                         }
                         onAddLink={this.addLink}
                     />
+                    {!this.state.searchbar_hidden && (
+                        <SearchBar
+                            onSearch={(query) => {
+                                this.resetLinks();
+                                if (query) {
+                                    this.query_params["query"] = query;
+                                }
+                                this.fetchLinks();
+                            }}
+                        />
+                    )}
                     <LinkList
                         links={this.state.links}
                         fetchMore={this.fetchLinks}

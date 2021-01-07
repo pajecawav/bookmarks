@@ -44,6 +44,7 @@ def fetch_link_title(link: models.Link, db: Session) -> None:
 
 @router.get("", response_model=List[schemas.Link])
 def get_links(
+    query: Optional[str] = None,
     liked: Optional[bool] = None,
     archived: Optional[bool] = None,
     offset: int = 0,
@@ -58,6 +59,9 @@ def get_links(
 
     if archived is not None:
         links = links.filter(models.Link.archived == archived)
+
+    if query is not None:
+        links = links.filter(models.Link.title.like(f"%{query}%"))
 
     return links.offset(offset).limit(limit).all()
 

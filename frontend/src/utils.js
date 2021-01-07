@@ -15,3 +15,5 @@ export const isLoggedIn = async () => {
     if (getLocalToken() === null) return false;
     return await testToken();
 };
+
+export const media_query = window.matchMedia("(min-width: 640px)");

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as HomeIcon } from "../icons/home.svg";
 import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
+import { ReactComponent as SearchIcon } from "../icons/search.svg";
 
 export default class Sidebar extends Component {
     constructor(props) {
@@ -38,22 +39,29 @@ export default class Sidebar extends Component {
                         className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
                         to="/"
                     >
-                        <HomeIcon className="hover:fill-blue hover:stroke-blue" />
+                        <HomeIcon />
                         <span>Home</span>
                     </Link>
                     <Link
                         className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
                         to="/liked"
                     >
-                        <HeartIcon className="hover:fill-blue hover:stroke-blue" />
+                        <HeartIcon />
                         <span>Liked</span>
                     </Link>
                     <Link
                         className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
                         to="/archived"
                     >
-                        <ArchiveIcon className="hover:fill-blue hover:stroke-blue" />
+                        <ArchiveIcon />
                         <span>Archive</span>
+                    </Link>
+                    <Link
+                        className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                        to="/search"
+                    >
+                        <SearchIcon />
+                        <span>Search</span>
                     </Link>
                 </div>
             </div>
