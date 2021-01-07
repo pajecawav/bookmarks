@@ -4,6 +4,8 @@ import Sidebar from "./Sidebar";
 import LinkList from "./LinkList";
 import { getLiked, getLinks, getArchived } from "../api";
 
+const media_query = window.matchMedia("(min-width: 640px)");
+
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -11,7 +13,7 @@ export default class Home extends Component {
         this.offset = 0;
 
         this.state = {
-            sidebar_hidden: false,
+            sidebar_hidden: !media_query.matches,
             links: [],
             load_on_scroll: true,
         };
