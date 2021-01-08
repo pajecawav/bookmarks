@@ -29,8 +29,8 @@ module.exports = {
     },
     variants: {
         extend: {
-            fill: ["hover", "focus"],
-            stroke: ["hover", "focus"],
+            fill: ["hover", "focus", "group-hover"],
+            stroke: ["hover", "focus", "group-hover"],
         },
     },
     plugins: [],

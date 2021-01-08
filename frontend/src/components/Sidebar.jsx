@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as HomeIcon } from "../icons/home.svg";
@@ -35,34 +35,39 @@ export default class Sidebar extends Component {
                 </Link>
 
                 <div className="flex flex-col gap-4">
-                    <Link
-                        className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                    <NavLink
+                        className="group flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                        activeClassName="font-bold text-blue-500"
+                        exact
                         to="/"
                     >
-                        <HomeIcon />
+                        <HomeIcon className="group-hover:fill-blue group-hover:stroke-blue" />
                         <span>Home</span>
-                    </Link>
-                    <Link
-                        className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                    </NavLink>
+                    <NavLink
+                        className="group flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                        activeClassName="font-bold text-blue-500"
                         to="/liked"
                     >
-                        <HeartIcon />
+                        <HeartIcon className="group-hover:fill-blue group-hover:stroke-blue" />
                         <span>Liked</span>
-                    </Link>
-                    <Link
-                        className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                    </NavLink>
+                    <NavLink
+                        className="group flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                        activeClassName="font-bold text-blue-500"
                         to="/archived"
                     >
-                        <ArchiveIcon />
+                        <ArchiveIcon className="group-hover:fill-blue group-hover:stroke-blue" />
                         <span>Archive</span>
-                    </Link>
-                    <Link
-                        className="flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                    </NavLink>
+                    <NavLink
+                        className="group flex items-center gap-3 cursor-pointer hover:text-blue-500"
+                        activeClassName="font-bold text-blue-500"
                         to="/search"
                     >
-                        <SearchIcon />
+                        <SearchIcon className="group-hover:fill-blue group-hover:stroke-blue" />
                         <span>Search</span>
-                    </Link>
+                    </NavLink>
                 </div>
             </div>
         );
