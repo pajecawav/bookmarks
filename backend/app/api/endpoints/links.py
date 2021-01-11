@@ -78,9 +78,14 @@ def add_link(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    fetch_title = link_in.title is None
+
     link = crud.link.create(db, link_in)
     crud.user.add_link(db, user=current_user, link=link)
-    background_tasks.add_task(fetch_link_title, link=link, db=db)
+
+    if fetch_title:
+        background_tasks.add_task(fetch_link_title, link=link, db=db)
+
     return link
 
 

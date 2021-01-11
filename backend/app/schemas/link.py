@@ -5,6 +5,7 @@ from pydantic import BaseModel, HttpUrl
 
 
 class LinkCreate(BaseModel):
+    title: Optional[str]
     url: HttpUrl
 
 

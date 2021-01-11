@@ -9,7 +9,9 @@ from .base import CRUDBase
 
 class CRUDLink(CRUDBase[Link, LinkCreate, LinkUpdate]):
     def create(self, db: Session, link_in: LinkCreate) -> Link:
-        obj = self.model(**jsonable_encoder(link_in), title=link_in.url)
+        if link_in.title is None:
+            link_in.title = link_in.url
+        obj = self.model(**jsonable_encoder(link_in))
         db.add(obj)
         db.commit()
         db.refresh(obj)
