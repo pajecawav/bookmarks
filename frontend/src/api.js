@@ -5,7 +5,7 @@ const encodeGetParams = (p) =>
         .map((kv) => kv.map(encodeURIComponent).join("="))
         .join("&");
 
-function getAuthHeaders() {
+export function getAuthHeaders() {
     let token = getLocalToken();
     return {
         Authorization: `Bearer ${token}`,

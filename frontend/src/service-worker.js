@@ -20,6 +20,10 @@ registerRoute(({ request, url }) => {
         return false;
     }
 
+    if (url.pathname.startsWith("/api")) {
+        return false;
+    }
+
     if (url.pathname.match(fileExtensionRegexp)) {
         return false;
     }
@@ -41,3 +45,46 @@ self.addEventListener("message", (event) => {
         self.skipWaiting();
     }
 });
+
+const shareTargetHandler = async ({ event }) => {
+    // taken from https://itnext.io/using-service-worker-as-an-auth-relay-5abc402878dd
+
+    const allClients = await self.clients.matchAll();
+    const client = allClients.filter((client) => client.type === "window")[0];
+
+    if (!client) {
+        return null;
+    }
+
+    const channel = new MessageChannel();
+
+    client.postMessage(
+        {
+            action: "getAuthTokenHeader",
+        },
+        [channel.port1]
+    );
+
+    let authHeader = await new Promise((resolve, reject) => {
+        channel.port2.onmessage = (event) => {
+            if (event.data.error) {
+                console.error("Port error", event.error);
+                reject(event.data.error);
+            }
+
+            resolve(event.data.authHeader);
+        };
+    });
+
+    const formData = await event.request.formData();
+    const response = await fetch("/api/links", {
+        method: "POST",
+        headers: authHeader,
+        body: JSON.stringify({
+            title: formData.get("title"),
+            url: formData.get("text"),
+        }),
+    });
+    return Response.redirect("/");
+};
+registerRoute("/api/links/share", shareTargetHandler, "POST");
