@@ -24,7 +24,7 @@ def get_requested_link(
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail="Link not found"
         )
-    elif link.user_id != current_user.id:
+    elif not current_user.is_superuser and link.user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="No permission to access this link",

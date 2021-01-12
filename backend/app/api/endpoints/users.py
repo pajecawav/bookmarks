@@ -10,8 +10,9 @@ router = APIRouter()
 
 @router.post("", response_model=schemas.User)
 def create_user(
-    user_in: schemas.UserCreate, db: Session = Depends(dependencies.get_db)
+    username: str, password: str, db: Session = Depends(dependencies.get_db)
 ):
+    user_in = schemas.UserCreate(username=username, password=password)
     if crud.user.get_by_username(db, username=user_in.username):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,

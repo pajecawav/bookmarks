@@ -14,6 +14,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         obj = self.model(
             username=object_in.username,
             password_hashed=get_password_hash(object_in.password),
+            is_superuser=object_in.is_superuser,
         )
         db.add(obj)
         db.commit()

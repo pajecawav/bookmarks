@@ -11,6 +11,9 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str
 
+    SUPERUSER_USERNAME: str
+    SUPERUSER_PASSWORD: str
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
