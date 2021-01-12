@@ -1,16 +1,17 @@
-from typing import Generator
+from typing import Dict, Generator
 
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.engine import create_engine
 from sqlalchemy.orm.session import sessionmaker
+from sqlalchemy.pool import StaticPool
 
+from app import crud, schemas
 from app.api.dependencies import get_db
-from app.db import base
+from app.config import settings
 from app.db.database import Base
 from app.main import app
-
-from sqlalchemy.pool import StaticPool
+from app.tests.utils import get_user_auth_headers
 
 engine = create_engine(
     "sqlite://",
@@ -20,6 +21,12 @@ engine = create_engine(
 )
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
+user_in = schemas.UserCreate(
+    username=settings.SUPERUSER_USERNAME,
+    password=settings.SUPERUSER_PASSWORD,
+    is_superuser=True,
+)
+user = crud.user.create(TestingSessionLocal(), user_in)
 
 
 def override_get_db():
@@ -42,3 +49,11 @@ def db() -> Generator:
 def client() -> Generator:
     with TestClient(app) as c:
         yield c
+
+
+@pytest.fixture(scope="module")
+def superuser_headers(client: TestClient) -> Dict[str, str]:
+    headers = get_user_auth_headers(
+        settings.SUPERUSER_USERNAME, settings.SUPERUSER_PASSWORD, client
+    )
+    return headers

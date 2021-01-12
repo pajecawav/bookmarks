@@ -1,10 +1,10 @@
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.config import settings
-from app.tests.utils import random_lower_string
-from app.schemas import UserCreate
 from app import crud
+from app.config import settings
+from app.schemas import UserCreate
+from app.tests.utils import random_lower_string
 
 
 def test_create_user(client: TestClient) -> None:
@@ -15,6 +15,7 @@ def test_create_user(client: TestClient) -> None:
     assert response.status_code == 200
     new_user = response.json()
     assert username == new_user["username"]
+    assert not new_user["is_superuser"]
 
 
 def test_create_existing_user(client: TestClient, db: Session) -> None:
