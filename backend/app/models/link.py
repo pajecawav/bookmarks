@@ -1,8 +1,8 @@
 from datetime import datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-from typings import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from app.models import User  # noqa: F401
