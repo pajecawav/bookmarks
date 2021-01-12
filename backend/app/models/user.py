@@ -1,5 +1,10 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy.orm import relationship
+
+if TYPE_CHECKING:
+    from app.models import Link  # noqa: F401
 
 from app.db.database import Base
 

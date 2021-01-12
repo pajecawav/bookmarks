@@ -2,6 +2,10 @@ from datetime import datetime
 
 from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
+from typings import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from app.models import User  # noqa: F401
 
 from app.db.database import Base
 
