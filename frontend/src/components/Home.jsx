@@ -5,6 +5,7 @@ import LinkList from "./LinkList";
 import SearchBar from "./SearchBar";
 import { getLinks } from "../api";
 import { media_query } from "../utils";
+import { ReactComponent as CloseIcon } from "../icons/close.svg";
 
 export default class Home extends Component {
     constructor(props) {
@@ -12,12 +13,14 @@ export default class Home extends Component {
         this.location = props.location.pathname;
 
         this.searching = this.location === "/search";
+        const url_params = new URLSearchParams(props.location.search);
 
         this.state = {
             sidebar_hidden: !media_query.matches,
             searchbar_hidden: !this.searching,
             links: [],
             load_on_scroll: !this.searching,
+            message: url_params.get("message"),
         };
 
         this.fetchLinks = this.fetchLinks.bind(this);
@@ -119,6 +122,17 @@ export default class Home extends Component {
                     {no_links && !this.searching && (
                         <div className="h-48 mx-4 flex items-center justify-center border-b">
                             <h1 className="text-gray-500 text-xl">No links.</h1>
+                        </div>
+                    )}
+                    {this.state.message && (
+                        <div className="flex px-4 py-2 my-4 mx-4 border border-gray-600 bg-blue-100 rounded">
+                            <div className="flex-grow">
+                                {this.state.message}
+                            </div>
+                            <CloseIcon
+                                className="mb-auto cursor-pointer"
+                                onClick={() => this.setState({ message: null })}
+                            />
                         </div>
                     )}
                     <LinkList

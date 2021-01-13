@@ -85,6 +85,8 @@ const shareTargetHandler = async ({ event }) => {
             url: formData.get("text"),
         }),
     });
-    return Response.redirect("/");
+    let params = new URLSearchParams();
+    params.append("message", "Successfully added new link.");
+    return Response.redirect(`/?${params.toString()}`);
 };
 registerRoute("/_share", shareTargetHandler, "POST");
