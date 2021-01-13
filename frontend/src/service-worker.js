@@ -87,4 +87,4 @@ const shareTargetHandler = async ({ event }) => {
     });
     return Response.redirect("/");
 };
-registerRoute("/api/links/share", shareTargetHandler, "POST");
+registerRoute("/_share", shareTargetHandler, "POST");
