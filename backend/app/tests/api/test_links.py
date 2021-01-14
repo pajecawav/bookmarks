@@ -42,6 +42,22 @@ def test_read_link(
     assert json["archived"] == link.archived
 
 
+def test_update_link(
+    client: TestClient, db: Session, superuser_headers: Dict[str, str]
+) -> None:
+    link = create_random_link(db)
+    new_title = link.title + " updated"
+    new_url = link.url + ".edu"
+    data = {"title": new_title, "url": new_url}
+    response = client.post(
+        f"{settings.API_ROUTE}/links/{link.id}", headers=superuser_headers, json=data
+    )
+    assert response.status_code == 200
+    link2 = response.json()
+    assert link2["title"] == new_title
+    assert link2["url"] == new_url
+
+
 def test_like_link(
     client: TestClient, db: Session, superuser_headers: Dict[str, str]
 ) -> None:
