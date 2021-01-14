@@ -50,7 +50,7 @@ export default function AddLinkModal(props) {
                 </div>
                 <form onSubmit={addLink_}>
                     <input
-                        className="flex-grow border rounded w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
+                        className="flex-grow border rounded sm:w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
                         type="url"
                         placeholder="Enter URL"
                         autoFocus={true}

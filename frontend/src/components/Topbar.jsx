@@ -20,7 +20,7 @@ export default function Topbar(props) {
             />
             <div className="flex gap-4 ml-auto">
                 <div
-                    className="hidden sm:block cursor-pointer hover:text-blue-500"
+                    className="cursor-pointer hover:text-blue-500"
                     onClick={() => setAddingLink(true)}
                 >
                     Add Link
