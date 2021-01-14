@@ -1,7 +1,9 @@
 from datetime import datetime
-from typing import Optional
+from typing import List, Optional
 
 from pydantic import BaseModel, HttpUrl
+
+from app.schemas.tag import Tag, TagCreate
 
 
 class LinkCreate(BaseModel):
@@ -16,6 +18,7 @@ class Link(BaseModel):
     liked: bool
     archived: bool
     date_added: datetime
+    tags: List[Tag]
 
     class Config:
         orm_mode = True
@@ -24,3 +27,4 @@ class Link(BaseModel):
 class LinkUpdate(BaseModel):
     url: Optional[HttpUrl]
     title: Optional[str]
+    tags: Optional[List[TagCreate]]

@@ -66,7 +66,7 @@ export default function AddLinkModal(props) {
                         onSubmit={addLink_}
                     >
                         <div>
-                            <label className="sm:hidden mr-4" for="add-url">
+                            <label className="sm:hidden mr-4" htmlFor="add-url">
                                 URL
                             </label>
                             <input

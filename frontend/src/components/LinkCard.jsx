@@ -5,7 +5,6 @@ import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
 import { ReactComponent as EditIcon } from "../icons/edit.svg";
-import { media_query } from "../utils";
 
 const getHostnameFromRegex = (url) => {
     const matches = url.match(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i);
@@ -16,17 +15,30 @@ export default function LinkCard(props) {
     const [title, setTitle] = useState(props.title);
     const [url, setUrl] = useState(props.url);
     const [liked, setLiked] = useState(props.liked);
+    const [tags, setTags] = useState(props.tags);
     const [visible, setVisible] = useState(true);
     const [editing, setEditing] = useState(false);
 
     const onUpdate = (newLink) => {
         setTitle(newLink.title);
         setUrl(newLink.url);
+        setTags(newLink.tags);
     };
 
     if (!visible) {
         return null;
     }
+
+    const renderTag = (name) => {
+        return (
+            <div
+                key={name}
+                className="flex h-6 px-3 items-center rounded-md text-sm cursor-pointer bg-gray-200 hover:bg-blue-200 text-gray-500 hover:text-black"
+            >
+                {name}
+            </div>
+        );
+    };
 
     return (
         <div className="flex flex-col min-h-full pb-4 mb-4 flex-grow border-b-2">
@@ -46,6 +58,10 @@ export default function LinkCard(props) {
             >
                 {getHostnameFromRegex(url)}
             </a>
+
+            <div className="flex flex-wrap gap-2 mt-3 ">
+                {tags.map((tag) => renderTag(tag.name))}
+            </div>
 
             <div className="flex gap-4 mt-3">
                 <HeartIcon
@@ -102,6 +118,7 @@ export default function LinkCard(props) {
                     id={props.id}
                     title={title}
                     url={url}
+                    tags={tags}
                 />
             )}
         </div>
