@@ -22,5 +22,5 @@ class Link(BaseModel):
 
 
 class LinkUpdate(BaseModel):
-    url: Optional[str]
+    url: Optional[HttpUrl]
     title: Optional[str]

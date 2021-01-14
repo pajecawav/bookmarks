@@ -5,6 +5,8 @@ const encodeGetParams = (p) =>
         .map((kv) => kv.map(encodeURIComponent).join("="))
         .join("&");
 
+// TODO: throw exceptions with errors instead of returning response status
+
 export function getAuthHeaders() {
     let token = getLocalToken();
     return {
@@ -73,6 +75,19 @@ export async function addLink(url) {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({ url }),
+    });
+    const json = await response.json();
+    if (response.ok) {
+        return { ok: true, link: json };
+    }
+    return { ok: false, error: json.detail };
+}
+
+export async function updateLink(id, link) {
+    const response = await fetch(`/api/links/${id}`, {
+        method: "POST",
+        headers: getAuthHeaders(),
+        body: JSON.stringify(link),
     });
     const json = await response.json();
     if (response.ok) {
