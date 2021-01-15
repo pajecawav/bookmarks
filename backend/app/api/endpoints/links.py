@@ -49,7 +49,6 @@ def get_links(
     archived: Optional[bool] = None,
     offset: int = 0,
     limit: int = 20,
-    db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
     links = current_user.links
@@ -103,7 +102,6 @@ def update_link(
 def delete_link(
     link_id: int,
     db: Session = Depends(dependencies.get_db),
-    link: models.Link = Depends(get_requested_link),
 ):
     crud.link.delete(db, id=link_id)
     return {"status": "success"}

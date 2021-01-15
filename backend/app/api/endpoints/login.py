@@ -27,7 +27,5 @@ def login_access_token(
 
 
 @router.post("/test-token", response_model=schemas.User)
-def login_test_token(
-    db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)
-):
+def login_test_token(current_user: models.User = Depends(get_current_user)):
     return current_user

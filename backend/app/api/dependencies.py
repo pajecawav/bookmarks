@@ -10,9 +10,11 @@ from app import crud, models, schemas, security
 from app.config import settings
 from app.db.database import SessionLocal
 
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/".join((settings.API_ROUTE, "login/token"))
-)
+token_url = "login/token"
+if settings.API_ROUTE:
+    token_url = f"{settings.API_ROUTE}/{token_url}".lstrip("/")
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=token_url)
 
 
 def get_db() -> Generator:
