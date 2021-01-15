@@ -2,7 +2,7 @@ from typing import List, Optional
 
 import requests
 from bs4 import BeautifulSoup
-from fastapi import APIRouter, BackgroundTasks, Depends, status
+from fastapi import APIRouter, BackgroundTasks, Depends, Query, status
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
@@ -47,11 +47,15 @@ def get_links(
     query: Optional[str] = None,
     liked: Optional[bool] = None,
     archived: Optional[bool] = None,
+    tags: Optional[List[str]] = Query(None),
     offset: int = 0,
     limit: int = 20,
     current_user: models.User = Depends(get_current_user),
 ):
     links = current_user.links
+
+    if tags:
+        links = links.join(models.Link.tags).filter(models.Tag.name.in_(tags))
 
     if liked is not None:
         links = links.filter(models.Link.liked == liked)
