@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session
 
@@ -31,12 +33,11 @@ class CRUDLink(CRUDBase[Link, LinkCreate, LinkUpdate]):
                 setattr(object_db, key, new_data[key])
 
         if tags is not None:
-            # TODO: preserve order or sort alphabetically?
-            unique_tag_names = {tag["name"] for tag in tags}
-            object_db.tags = {
+            unique_tag_names = list(OrderedDict.fromkeys({tag["name"] for tag in tags}))
+            object_db.tags = [
                 crud_tag.tag.create(db, TagCreate(name=name))
                 for name in unique_tag_names
-            }
+            ]
 
         db.add(object_db)
         db.commit()

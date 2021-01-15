@@ -27,7 +27,6 @@ class Link(Base):
         secondary=link_to_tag_table,
         back_populates="links",
         uselist=True,
-        collection_class=set,
     )
 
     user_id = Column(Integer, ForeignKey("users.id"))

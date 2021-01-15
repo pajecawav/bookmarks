@@ -39,14 +39,16 @@ def test_update_link(db: Session) -> None:
     new_title = random_lower_string()
     new_url = "https://example.org"
     tag_name = random_lower_string()
-    tags = [TagCreate(name=tag_name)]
-    link_update = LinkUpdate(title=new_title, url=new_url, tags=tags)
+    link_update = LinkUpdate(
+        title=new_title, url=new_url, tags=[TagCreate(name=tag_name)]
+    )
     new_link = crud.link.update(db, object_db=link, object_update=link_update)
     assert new_link
     assert new_link.title == new_title
     assert new_link.url == new_url
-    assert len(new_link.tags) == 1
-    assert new_link.tags.pop().name == tag_name
+    new_tags = list(new_link.tags)
+    assert len(new_tags) == 1
+    assert new_tags[0].name == tag_name
 
 
 def test_delete_link(db: Session) -> None:
