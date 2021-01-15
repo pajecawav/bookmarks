@@ -70,14 +70,15 @@ export async function getLink(link_id) {
     return json;
 }
 
-export async function addLink(url) {
+export async function addLink(link) {
     const response = await fetch("/api/links", {
         method: "POST",
         headers: getAuthHeaders(),
-        body: JSON.stringify({ url }),
+        body: JSON.stringify(link),
     });
     const json = await response.json();
     if (response.ok) {
+        console.log(json);
         return { ok: true, link: json };
     }
     return { ok: false, error: json.detail };

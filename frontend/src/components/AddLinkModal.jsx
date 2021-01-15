@@ -19,12 +19,15 @@ const customStyles = {
 };
 
 export default function AddLinkModal(props) {
-    let [url, setUrl] = useState(null);
     let [errors, setErrors] = useState(null);
 
     let addLink_ = async (event) => {
         event.preventDefault();
-        let result = await addLink(url);
+        const data = new FormData(event.target);
+        let result = await addLink({
+            title: data.get("add-title") || null,
+            url: data.get("add-url"),
+        });
         if (result.ok) {
             props.onRequestClose();
             props.onAddLink(result.link);
@@ -51,22 +54,26 @@ export default function AddLinkModal(props) {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    {errors &&
-                        errors.map((error) => (
-                            <div
-                                className="bg-red-200 text-red-800 border border-red-800 px-4 py-2 rounded-md"
-                                key={error}
-                            >
-                                {error}
-                            </div>
-                        ))}
-
-                    <form
-                        className="flex sm:flex-row gap-4 sm:gap-0 flex-col"
-                        onSubmit={addLink_}
-                    >
+                    <form className="flex flex-col gap-4" onSubmit={addLink_}>
                         <div>
-                            <label className="sm:hidden mr-4" htmlFor="add-url">
+                            <label
+                                className="inline-block w-10 mr-4 text-gray-700"
+                                htmlFor="add-title"
+                            >
+                                Title
+                            </label>
+                            <input
+                                className="flex-grow border rounded sm:w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
+                                type="text"
+                                name="add-title"
+                                placeholder="Title (Optional)"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                className="inline-block w-10 mr-4 text-gray-700"
+                                htmlFor="add-url"
+                            >
                                 URL
                             </label>
                             <input
@@ -74,13 +81,22 @@ export default function AddLinkModal(props) {
                                 type="url"
                                 name="add-url"
                                 placeholder="Enter URL"
-                                autoFocus={true}
                                 required
-                                onChange={(event) => setUrl(event.target.value)}
                             />
                         </div>
+
+                        {errors &&
+                            errors.map((error) => (
+                                <div
+                                    className="bg-red-200 text-red-800 border border-red-800 px-4 py-2 rounded-md"
+                                    key={error}
+                                >
+                                    {error}
+                                </div>
+                            ))}
+
                         <input
-                            className="text-white h-full w-max bg-gray-900 hover:bg-blue-500 px-8 py-2 ml-auto sm:ml-4 rounded"
+                            className="text-white ml-auto w-max h-full bg-gray-900 hover:bg-blue-500 px-8 py-2 rounded cursor-pointer"
                             type="submit"
                             value="Add"
                         />
