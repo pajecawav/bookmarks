@@ -33,7 +33,7 @@ class CRUDLink(CRUDBase[Link, LinkCreate, LinkUpdate]):
                 setattr(object_db, key, new_data[key])
 
         if tags is not None:
-            unique_tag_names = list(OrderedDict.fromkeys({tag["name"] for tag in tags}))
+            unique_tag_names = list(OrderedDict.fromkeys(tag["name"] for tag in tags))
             object_db.tags = [
                 crud_tag.tag.create(db, TagCreate(name=name))
                 for name in unique_tag_names
