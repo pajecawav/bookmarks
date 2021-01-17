@@ -37,7 +37,7 @@ def fetch_link_title(link: models.Link, db: Session) -> None:
     soup = BeautifulSoup(response.content, "html.parser")
     title = soup.find("title")
     if title is not None:
-        link.title = title.string
+        link.title = title.string.replace("\n", "").strip(" ")
         db.add(link)
         db.commit()
 
