@@ -13,6 +13,7 @@ from app.db.database import Base
 from app.main import app
 from app.tests.utils import get_user_auth_headers
 
+# TODO: use Postgres DB for testing?
 engine = create_engine(
     "sqlite://",
     pool_pre_ping=True,

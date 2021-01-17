@@ -1,4 +1,4 @@
-from sqlalchemy import Column, ForeignKey, Integer, Table
+from sqlalchemy import Column, ForeignKey, Integer, String, Table
 
 from app.db.database import Base
 
@@ -6,5 +6,5 @@ link_to_tag_table = Table(
     "link_to_tag",
     Base.metadata,
     Column("link_id", Integer, ForeignKey("links.id")),
-    Column("tag_name", Integer, ForeignKey("tags.name")),
+    Column("tag_name", String, ForeignKey("tags.name")),
 )

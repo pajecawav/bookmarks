@@ -18,5 +18,9 @@ class User(Base):
     is_superuser = Column(Boolean, nullable=False, default=False)
 
     links = relationship(
-        "Link", back_populates="user", lazy="dynamic", order_by="desc(Link.date_added)"
+        "Link",
+        back_populates="user",
+        cascade="all,delete,delete-orphan",
+        lazy="dynamic",
+        order_by="desc(Link.date_added)",
     )
