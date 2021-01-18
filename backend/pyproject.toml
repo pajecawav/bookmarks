@@ -15,7 +15,8 @@ passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.5"
 requests = "^2.25.1"
 beautifulsoup4 = "^4.9.3"
-psycopg2 = "^2.8.6"
+psycopg2-binary = "^2.8.6"
+tenacity = "^6.3.1"
 
 [tool.poetry.dev-dependencies]
 black = "^20.8b1"

@@ -6,6 +6,16 @@ It uses [FastAPI](https://github.com/tiangolo/fastapi) for backend and [React](h
 
 # Installation
 
+## Using Docker
+
+1.  Install [Docker Compose](https://docs.docker.com/compose/install/)
+
+1.  Run `docker-compose up -d`
+
+1.  Navigate to `http://localhost:3000`.
+
+## Manual Installation
+
 1.  Install [poetry](https://python-poetry.org/docs/#installation) and [npm](https://www.npmjs.com/get-npm)
 
 1.  Clone project
