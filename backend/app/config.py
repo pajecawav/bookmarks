@@ -1,7 +1,7 @@
 import secrets
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseSettings, PostgresDsn, validator
+from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator
 
 
 class Settings(BaseSettings):
@@ -9,6 +9,16 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 30  # 30 days
     API_ROUTE = ""
+
+    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+
+    @validator("BACKEND_CORS_ORIGINS", pre=True)
+    def build_cors_origins(cls, value: Union[str, List[str]]) -> Union[List[str], str]:
+        if isinstance(value, str) and not value.startswith("["):
+            return [i.strip() for i in value.split(",")]
+        elif isinstance(value, (list, str)):
+            return value
+        raise ValueError(value)
 
     POSTGRES_SERVER: str
     POSTGRES_USER: str
