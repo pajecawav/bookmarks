@@ -64,7 +64,7 @@ def get_links(
         links = links.filter(models.Link.archived == archived)
 
     if query is not None:
-        links = links.filter(models.Link.title.like(f"%{query}%"))
+        links = links.filter(models.Link.title.ilike(f"%{query}%"))
 
     return links.offset(offset).limit(limit).all()
 
