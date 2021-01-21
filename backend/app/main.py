@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api import api
 from app.config import settings
 
-app = FastAPI()
+app = FastAPI(title="Bookmarks")
 
 if settings.BACKEND_CORS_ORIGINS:
     app.add_middleware(
