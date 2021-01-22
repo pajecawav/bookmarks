@@ -28,3 +28,5 @@ class LinkUpdate(BaseModel):
     url: Optional[HttpUrl]
     title: Optional[str]
     tags: Optional[List[TagCreate]]
+    liked: Optional[bool]
+    archived: Optional[bool]

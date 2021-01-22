@@ -103,17 +103,3 @@ export async function deleteLink(link_id) {
         headers: getAuthHeaders(),
     });
 }
-
-export async function toggleLiked(link_id) {
-    await fetch(`/api/links/${link_id}/toggle_liked`, {
-        method: "POST",
-        headers: getAuthHeaders(),
-    });
-}
-
-export async function toggleArchived(link_id) {
-    await fetch(`/api/links/${link_id}/toggle_archived`, {
-        method: "POST",
-        headers: getAuthHeaders(),
-    });
-}

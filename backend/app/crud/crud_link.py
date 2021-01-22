@@ -45,13 +45,5 @@ class CRUDLink(CRUDBase[Link, LinkCreate, LinkUpdate]):
 
         return object_db
 
-    def toggle_liked(self, db: Session, *, link: Link) -> None:
-        link.liked = not link.liked
-        db.commit()
-
-    def toggle_archived(self, db: Session, *, link: Link) -> None:
-        link.archived = not link.archived
-        db.commit()
-
 
 link = CRUDLink(Link)

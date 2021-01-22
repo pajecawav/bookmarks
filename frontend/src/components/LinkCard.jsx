@@ -1,6 +1,6 @@
 import { useState } from "react";
 import EditLinkModal from "./EditLinkModal";
-import { toggleLiked, deleteLink, toggleArchived } from "../api";
+import { updateLink, deleteLink } from "../api";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
@@ -15,6 +15,7 @@ export default function LinkCard(props) {
     const [title, setTitle] = useState(props.title);
     const [url, setUrl] = useState(props.url);
     const [liked, setLiked] = useState(props.liked);
+    const [archived, setArchived] = useState(props.archived);
     const [tags, setTags] = useState(props.tags);
     const [visible, setVisible] = useState(true);
     const [editing, setEditing] = useState(false);
@@ -72,7 +73,7 @@ export default function LinkCard(props) {
                     }`}
                     alt="toggle liked"
                     onClick={() => {
-                        toggleLiked(props.id);
+                        updateLink(props.id, { liked: !liked });
                         setLiked(!liked);
                     }}
                 />
@@ -85,8 +86,9 @@ export default function LinkCard(props) {
                     }`}
                     alt="archive"
                     onClick={() => {
-                        toggleArchived(props.id);
+                        updateLink(props.id, { archived: !archived });
                         // TODO: delete link from the list instead of hiding it
+                        setArchived(!archived);
                         setVisible(false);
                     }}
                 />

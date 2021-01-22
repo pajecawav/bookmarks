@@ -40,12 +40,18 @@ def test_update_link(db: Session) -> None:
     new_url = "https://example.org"
     tag_name = random_lower_string()
     link_update = LinkUpdate(
-        title=new_title, url=new_url, tags=[TagCreate(name=tag_name)]
+        title=new_title,
+        url=new_url,
+        tags=[TagCreate(name=tag_name)],
+        liked=not link.liked,
+        archived=not link.archived,
     )
     new_link = crud.link.update(db, object_db=link, object_update=link_update)
     assert new_link
-    assert new_link.title == new_title
-    assert new_link.url == new_url
+    assert new_link.title == link_update.title
+    assert new_link.url == link_update.url
+    assert new_link.liked == link_update.liked
+    assert new_link.archived == link_update.archived
     new_tags = list(new_link.tags)
     assert len(new_tags) == 1
     assert new_tags[0].name == tag_name
@@ -56,17 +62,3 @@ def test_delete_link(db: Session) -> None:
     crud.link.delete(db, id=link.id)
     link2 = crud.link.get(db, link.id)
     assert link2 is None
-
-
-def test_toggle_liked(db: Session) -> None:
-    link = create_random_link(db)
-    liked = link.liked
-    crud.link.toggle_liked(db, link=link)
-    assert link.liked != liked
-
-
-def test_toggle_archived(db: Session) -> None:
-    link = create_random_link(db)
-    archived = link.archived
-    crud.link.toggle_archived(db, link=link)
-    assert link.archived != archived
