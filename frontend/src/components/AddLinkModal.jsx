@@ -24,17 +24,18 @@ export default function AddLinkModal(props) {
     let addLink_ = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
-        let result = await addLink({
+        addLink({
             title: data.get("add-title") || null,
             url: data.get("add-url"),
-        });
-        if (result.ok) {
-            props.onRequestClose();
-            props.onAddLink(result.link);
-            setErrors([]);
-        } else {
-            setErrors(result.error.map((e) => e.msg));
-        }
+        })
+            .then((link) => {
+                props.onRequestClose();
+                props.onAddLink(link);
+                setErrors([]);
+            })
+            .catch((error) => {
+                setErrors(error.map((e) => e.msg));
+            });
     };
 
     return (

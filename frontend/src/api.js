@@ -29,9 +29,9 @@ export async function logInGetToken(username, password) {
     });
     let json = await response.json();
     if (response.ok) {
-        return { ok: true, token: json.access_token };
+        return json.access_token;
     }
-    return { ok: false, error: json.detail };
+    throw json.detail;
 }
 
 export async function signup(username, password) {
@@ -39,11 +39,10 @@ export async function signup(username, password) {
         method: "POST",
         body: JSON.stringify({ username, password }),
     });
-    if (response.ok) {
-        return { ok: true };
+    if (!response.ok) {
+        let json = await response.json();
+        throw json.detail;
     }
-    let json = await response.json();
-    return { ok: false, error: json.detail };
 }
 
 export async function testToken() {
@@ -78,10 +77,9 @@ export async function addLink(link) {
     });
     const json = await response.json();
     if (response.ok) {
-        console.log(json);
-        return { ok: true, link: json };
+        return json;
     }
-    return { ok: false, error: json.detail };
+    throw json.detail;
 }
 
 export async function updateLink(id, link) {
@@ -92,9 +90,9 @@ export async function updateLink(id, link) {
     });
     const json = await response.json();
     if (response.ok) {
-        return { ok: true, link: json };
+        return json;
     }
-    return { ok: false, error: json.detail };
+    throw json.detail;
 }
 
 export async function deleteLink(link_id) {

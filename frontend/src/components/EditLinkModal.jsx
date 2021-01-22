@@ -26,17 +26,18 @@ export default function EditLinkModal(props) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
-        let result = await updateLink(props.id, {
+        await updateLink(props.id, {
             title: data.get("title"),
             url: data.get("url"),
             tags: tagsInput.current.getTags(),
-        });
-        if (result.ok) {
-            props.onUpdate(result.link);
-            props.onRequestClose();
-        } else {
-            setErrors(result.error.map((e) => e.msg));
-        }
+        })
+            .then((link) => {
+                props.onUpdate(link);
+                props.onRequestClose();
+            })
+            .catch((errors) => {
+                setErrors(errors.map((e) => e.msg));
+            });
     };
 
     return (

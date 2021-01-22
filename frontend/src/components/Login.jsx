@@ -34,14 +34,12 @@ class Login extends Component {
             return;
         }
 
-        logInGetToken(this.username, this.password).then((result) => {
-            if (result.ok) {
-                this.props.onLogin(result.token, this.username);
+        logInGetToken(this.username, this.password)
+            .then((token) => {
+                this.props.onLogin(token, this.username);
                 this.props.history.push("/");
-            } else {
-                this.setState({ error: result.error });
-            }
-        });
+            })
+            .catch((error) => this.setState({ error: error }));
     }
 
     handleSignup(event) {
@@ -50,16 +48,14 @@ class Login extends Component {
             return;
         }
 
-        signup(this.username, this.password).then((result) => {
-            if (result.ok) {
-                logInGetToken(this.username, this.password).then((result) => {
-                    this.props.onLogin(result.token, this.username);
+        signup(this.username, this.password)
+            .then(() => {
+                logInGetToken(this.username, this.password).then((token) => {
+                    this.props.onLogin(token, this.username);
                     this.props.history.push("/");
                 });
-            } else {
-                this.setState({ error: result.error });
-            }
-        });
+            })
+            .catch((error) => this.setState({ error: error }));
     }
 
     render() {
