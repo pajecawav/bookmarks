@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from fastapi import APIRouter, BackgroundTasks, Depends, Query, status
 from fastapi.exceptions import HTTPException
+from requests.exceptions import ConnectionError
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
@@ -33,7 +34,10 @@ def get_requested_link(
 
 
 def fetch_link_title(link: models.Link, db: Session) -> None:
-    response = requests.get(link.url)
+    try:
+        response = requests.get(link.url)
+    except ConnectionError:
+        return
     soup = BeautifulSoup(response.content, "html.parser")
     title = soup.find("title")
     if title is not None:
