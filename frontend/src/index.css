@@ -18,17 +18,16 @@ html {
 
 body {
     margin: 0;
+    box-sizing: border-box;
+
     font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: 0.02em;
-
-    box-sizing: border-box;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 body::-webkit-scrollbar {
@@ -42,4 +41,17 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background-color: lightgrey;
     border-radius: 20px;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
 }

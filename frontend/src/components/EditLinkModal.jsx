@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { updateLink } from "../api";
 import { ReactComponent as CloseIcon } from "../icons/close.svg";
@@ -19,21 +19,28 @@ const customStyles = {
     },
 };
 
-export default function EditLinkModal(props) {
-    let [errors, setErrors] = useState(null);
-    let tagsInput = useRef(null);
+export default function EditLinkModal({
+    link,
+    onUpdate,
+    onRequestClose,
+    ...props
+}) {
+    const [errors, setErrors] = useState(null);
+    const [tags, setTags] = useState(link?.tags);
+
+    useEffect(() => setTags(link?.tags), [link?.tags]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
-        await updateLink(props.id, {
+        await updateLink(link.id, {
             title: data.get("title"),
             url: data.get("url"),
-            tags: tagsInput.current.getTags(),
+            tags,
         })
             .then((link) => {
-                props.onUpdate(link);
-                props.onRequestClose();
+                onUpdate(link);
+                onRequestClose();
             })
             .catch((errors) => {
                 setErrors(errors.map((e) => e.msg));
@@ -42,32 +49,32 @@ export default function EditLinkModal(props) {
 
     return (
         <Modal
-            isOpen={props.isOpen}
-            onRequestClose={props.onRequestClose}
+            onRequestClose={onRequestClose}
             style={customStyles}
             ariaHideApp={false}
+            {...props}
         >
             <>
-                <div className="flex w-full justify-between mb-4 pb-4 border-b-2">
-                    <div className="font-bold text-xl">Edit Link</div>
+                <div className="flex justify-between pb-4 mb-4 w-full border-b-2">
+                    <div className="text-xl font-bold">Edit Link</div>
                     <CloseIcon
                         className="cursor-pointer"
-                        onClick={props.onRequestClose}
+                        onClick={onRequestClose}
                     />
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
                         <label
                             htmlFor="title"
-                            className="inline-block w-10 mr-4 text-gray-700"
+                            className="inline-block mr-4 w-10 text-gray-700"
                         >
                             Title
                         </label>
                         <input
-                            className="border rounded sm:w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
+                            className="py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96"
                             type="text"
                             name="title"
-                            defaultValue={props.title}
+                            defaultValue={link?.title}
                             placeholder="Title"
                             required
                         />
@@ -75,30 +82,33 @@ export default function EditLinkModal(props) {
                     <div>
                         <label
                             htmlFor="url"
-                            className="inline-block w-10 mr-4 text-gray-700"
+                            className="inline-block mr-4 w-10 text-gray-700"
                         >
                             URL
                         </label>
                         <input
-                            className="border rounded sm:w-96 px-4 py-2 border-gray-400 focus:border-blue-500"
+                            className="py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96"
                             type="url"
                             name="url"
-                            defaultValue={props.url}
+                            defaultValue={link?.url}
                             placeholder="URL"
                             required
                         />
                     </div>
                     <div className="sm:flex">
-                        <label className="inline-block w-10 mr-4 text-gray-700">
+                        <label className="inline-block mr-4 w-10 text-gray-700">
                             Tags
                         </label>
-                        <TagsInput ref={tagsInput} tags={props.tags} />
+                        <TagsInput
+                            tags={tags}
+                            onTagsUpdate={(newTags) => setTags(newTags)}
+                        />
                     </div>
 
                     {errors &&
                         errors.map((error) => (
                             <div
-                                className="bg-red-200 text-red-800 border border-red-800 px-4 py-2 mt-2 rounded-md"
+                                className="py-2 px-4 mt-2 text-red-800 bg-red-200 rounded-md border border-red-800"
                                 key={error}
                             >
                                 {error}
@@ -106,7 +116,7 @@ export default function EditLinkModal(props) {
                         ))}
 
                     <input
-                        className="text-white ml-auto w-max h-full bg-gray-900 hover:bg-blue-500 px-8 py-2 rounded cursor-pointer"
+                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded cursor-pointer hover:bg-blue-500 duration-100"
                         type="submit"
                         value="Save"
                     />

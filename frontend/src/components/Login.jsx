@@ -62,11 +62,11 @@ class Login extends Component {
         return (
             <div className="flex h-screen">
                 <form
-                    className="flex flex-col w-80 gap-y-5 px-8 pt-6 pb-8 m-auto border-2 bg-white rounded-2xl shadow-md w-72"
+                    className="flex flex-col gap-y-5 px-8 pt-6 pb-8 m-auto w-72 w-80 bg-white rounded-2xl border-2 shadow-md"
                     onSubmit={this.handleLogin}
                 >
                     <input
-                        className="w-full text-gray-darker placeholder-gray-700 px-3 py-2 rounded-lg appearance-none border border-gray-400 focus:border-blue-500"
+                        className="py-2 px-3 w-full placeholder-gray-700 rounded-lg border border-gray-400 transition-colors duration-100 appearance-none text-gray-darker focus:border-blue-500"
                         id="username"
                         type="text"
                         placeholder="Username"
@@ -75,7 +75,7 @@ class Login extends Component {
                         }
                     />
                     <input
-                        className="w-full text-gray-darker placeholder-gray-700 px-3 py-2 rounded-lg appearance-none border border-gray-400 focus:border-blue-500"
+                        className="py-2 px-3 w-full placeholder-gray-700 rounded-lg border border-gray-400 transition-colors duration-100 appearance-none text-gray-darker focus:border-blue-500"
                         id="password"
                         type="password"
                         placeholder="Password"
@@ -84,18 +84,18 @@ class Login extends Component {
                         }
                     />
                     {this.state.error && (
-                        <div className="bg-red-200 text-red-800 border border-red-800 px-4 py-2 rounded-md">
+                        <div className="py-2 px-4 text-red-800 bg-red-200 rounded-md border border-red-800">
                             {this.state.error}
                         </div>
                     )}
-                    <div className="flex items-center justify-between">
+                    <div className="flex justify-between items-center">
                         <input
-                            className="px-4 py-2 font-bold text-white bg-gray-900 hover:bg-blue-500 rounded-lg hover:bg-blue-400"
+                            className="py-2 px-4 font-bold text-white bg-gray-900 rounded-lg duration-100 cursor-pointer hover:bg-blue-400 hover:bg-blue-500"
                             type="submit"
                             value="Sign In"
                         ></input>
                         <button
-                            className="px-4 py-2 font-bold text-white bg-gray-900 hover:bg-blue-500 rounded-lg hover:bg-blue-400"
+                            className="py-2 px-4 font-bold text-white bg-gray-900 rounded-lg duration-100 cursor-pointer hover:bg-blue-400 hover:bg-blue-500"
                             type="button"
                             onClick={this.handleSignup}
                         >

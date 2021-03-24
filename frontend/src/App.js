@@ -22,7 +22,7 @@ export default class App extends Component {
         super(props);
 
         this.state = {
-            logged_in: undefined,
+            loggedIn: undefined,
             username: null,
         };
 
@@ -31,9 +31,9 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        isLoggedIn().then((isLogged) => {
+        isLoggedIn().then((loggedIn) => {
             this.setState({
-                logged_in: isLogged,
+                loggedIn,
                 username: getLocalUsername(),
             });
         });
@@ -44,7 +44,7 @@ export default class App extends Component {
         saveLocalUsername(username);
 
         this.setState({
-            logged_in: true,
+            loggedIn: true,
             username: username,
         });
     }
@@ -52,13 +52,13 @@ export default class App extends Component {
     logout() {
         deleteLocalToken();
         this.setState({
-            logged_in: false,
+            loggedIn: false,
             username: null,
         });
     }
 
     render() {
-        if (this.state.logged_in === undefined) {
+        if (this.state.loggedIn === undefined) {
             return "";
         }
 
@@ -67,14 +67,14 @@ export default class App extends Component {
                 <Router>
                     <Switch>
                         <Route exact path="/login">
-                            {this.state.logged_in ? (
+                            {this.state.loggedIn ? (
                                 <Redirect to="/" />
                             ) : (
                                 <Login onLogin={this.login} />
                             )}
                         </Route>
-                        {!this.state.logged_in && <Redirect to="/login" />}
-                        <Route path={["/", "/liked"]} component={Home}></Route>
+                        {!this.state.loggedIn && <Redirect to="/login" />}
+                        <Route component={Home}></Route>
                     </Switch>
                 </Router>
             </AppContext.Provider>

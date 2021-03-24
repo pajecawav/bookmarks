@@ -76,9 +76,3 @@ It uses [FastAPI](https://github.com/tiangolo/fastapi) for backend and [React](h
 1.  Navigate to `http://localhost:3000`.
 
 For deployment options consider using [nginx](https://nginx.org/ru/) to serve static assets (generated with `npm run build`) and pass api requests to the backend.
-
-# TODO
-
--   tags
--   folders
--   dark theme

@@ -1,90 +1,64 @@
-import { Component } from "react";
+import { useState } from "react";
 import close from "../icons/close.svg";
 
-export default class TagsInput extends Component {
-    constructor(props) {
-        super(props);
+export default function TagsInput(props) {
+    const [tags, setTags] = useState(props.tags || []);
+    const [currentTag, setCurrentTag] = useState("");
 
-        this.state = {
-            tags: props.tags || [],
-            currentTag: "",
-        };
-
-        this.getTags = this.getTags.bind(this);
-        this.handleTagInput = this.handleTagInput.bind(this);
-        this.renderTag = this.renderTag.bind(this);
-    }
-
-    getTags() {
-        if (this.state.currentTag) {
-            return [...this.state.tags, { name: this.state.currentTag }];
-        } else {
-            return this.state.tags;
-        }
-    }
-
-    handleTagInput(event) {
-        if (event.key === "Enter" && this.state.currentTag) {
+    const handleTagInput = (event) => {
+        if (event.key === "Enter" && currentTag) {
             event.preventDefault();
-            const tag_exists =
-                this.state.tags.filter(
-                    (tag) => tag.name === this.state.currentTag
-                ).length !== 0;
-            if (!tag_exists) {
-                this.setState({
-                    tags: [...this.state.tags, { name: this.state.currentTag }],
-                });
+            const tagExists =
+                tags.filter((tag) => tag.name === currentTag).length !== 0;
+            if (!tagExists) {
+                const newTags = [...tags, { name: currentTag }];
+                setTags(newTags);
+                if (props.onTagsUpdate) {
+                    props.onTagsUpdate(newTags);
+                }
             }
-            this.setState({ currentTag: "" });
+            setCurrentTag("");
         } else if (
             event.key === "Backspace" &&
-            !this.state.currentTag &&
-            this.state.tags.length !== 0
+            !currentTag &&
+            tags.length !== 0
         ) {
             event.preventDefault();
-            let lastIndex = this.state.tags.length - 1;
-            this.setState({
-                tags: this.state.tags.filter((_, i) => i !== lastIndex),
-                currentTag: this.state.tags[lastIndex].name,
-            });
+            const lastTagIndex = tags.length - 1;
+            setCurrentTag(tags[lastTagIndex].name || "");
+            setTags(tags.filter((_, i) => i !== lastTagIndex));
         }
-    }
+    };
 
-    renderTag(tag, index) {
+    const renderTag = ({ name }) => {
         return (
             <div
-                key={tag.name}
-                className="flex items-center gap-1 h-6 px-3 hover:cursor-default rounded-md text-sm bg-gray-200 hover:bg-blue-200 text-gray-500 hover:text-black"
+                key={name}
+                className="flex gap-1 items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 hover:text-black hover:bg-blue-200 hover:cursor-default"
             >
-                {tag.name}
+                {name}
                 <img
                     src={close}
                     className="h-4 cursor-pointer"
                     alt="close"
                     onClick={() =>
-                        this.setState({
-                            tags: this.state.tags.filter((_, i) => i !== index),
-                        })
+                        setTags(tags.filter((tag) => tag.name !== name))
                     }
                 />
             </div>
         );
-    }
+    };
 
-    render() {
-        return (
-            <div className="flex flex-wrap p-2 gap-2 overflow-y-scroll border border-gray-400 rounded sm:w-96 ">
-                {this.state.tags.map(this.renderTag)}
-                <input
-                    className="w-10 flex-grow border-gray-400 focus:border-blue-500"
-                    type="text"
-                    value={this.state.currentTag}
-                    onKeyDown={this.handleTagInput}
-                    onChange={(event) =>
-                        this.setState({ currentTag: event.target.value })
-                    }
-                />
-            </div>
-        );
-    }
+    return (
+        <div className="flex overflow-y-scroll flex-wrap gap-2 p-2 rounded border border-gray-400 sm:w-96">
+            {tags.map(renderTag)}
+            <input
+                className="flex-grow w-10 border-gray-400 focus:border-blue-500"
+                type="text"
+                value={currentTag}
+                onKeyDown={handleTagInput}
+                onChange={(event) => setCurrentTag(event.target.value)}
+            />
+        </div>
+    );
 }

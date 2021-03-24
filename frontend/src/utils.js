@@ -16,4 +16,4 @@ export const isLoggedIn = async () => {
     return await testToken();
 };
 
-export const media_query = window.matchMedia("(min-width: 640px)");
+export const bigScreenMediaQuery = window.matchMedia("(min-width: 640px)");
