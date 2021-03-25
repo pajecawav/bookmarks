@@ -7,7 +7,7 @@ from app.db.database import Base, SessionLocal, engine
 
 
 def init_db(db: Session) -> None:
-    Base.metadata.create_all(bind=engine)
+    # Base.metadata.create_all(bind=engine)
 
     user = crud.user.get_by_username(db, username=settings.SUPERUSER_USERNAME)
     if not user:
