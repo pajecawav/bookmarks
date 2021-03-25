@@ -30,6 +30,9 @@ export default function TagsInput(props) {
         }
     };
 
+    const removeTag = (name) =>
+        setTags(tags.filter((tag) => tag.name !== name));
+
     const renderTag = ({ name }) => {
         return (
             <div
@@ -41,9 +44,7 @@ export default function TagsInput(props) {
                     src={close}
                     className="h-4 cursor-pointer"
                     alt="close"
-                    onClick={() =>
-                        setTags(tags.filter((tag) => tag.name !== name))
-                    }
+                    onClick={() => removeTag(name)}
                 />
             </div>
         );

@@ -101,3 +101,11 @@ export async function deleteLink(link_id) {
         headers: getAuthHeaders(),
     });
 }
+
+export async function getTags() {
+    const response = await fetch("/api/tags", {
+        headers: getAuthHeaders(),
+    });
+    const json = await response.json();
+    return json;
+}

@@ -5,6 +5,7 @@ import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as HomeIcon } from "../icons/home.svg";
 import { ReactComponent as SearchIcon } from "../icons/search.svg";
+import { ReactComponent as TagIcon } from "../icons/tag.svg";
 
 export default class Sidebar extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ export default class Sidebar extends Component {
                         to="/"
                     >
                         <HomeIcon className="duration-200 group-hover:stroke-blue" />
-                        <span>Home</span>
+                        <span className="duration-200">My List</span>
                     </NavLink>
                     <NavLink
                         className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
@@ -51,7 +52,7 @@ export default class Sidebar extends Component {
                         to="/liked"
                     >
                         <HeartIcon className="duration-200 group-hover:stroke-blue" />
-                        <span>Liked</span>
+                        <span className="duration-200">Liked</span>
                     </NavLink>
                     <NavLink
                         className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
@@ -59,7 +60,7 @@ export default class Sidebar extends Component {
                         to="/archived"
                     >
                         <ArchiveIcon className="duration-200 group-hover:stroke-blue" />
-                        <span>Archive</span>
+                        <span className="duration-200">Archive</span>
                     </NavLink>
                     <NavLink
                         className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
@@ -67,7 +68,17 @@ export default class Sidebar extends Component {
                         to="/search"
                     >
                         <SearchIcon className="duration-200 group-hover:stroke-blue" />
-                        <span>Search</span>
+                        <span className="duration-200">Search</span>
+                    </NavLink>
+                    <div className="mt-2 text-gray-600">Tags</div>
+                    <NavLink
+                        className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
+                        activeClassName="font-bold text-blue-500"
+                        to="/tags"
+                        exact
+                    >
+                        <TagIcon className="duration-200 group-hover:stroke-blue" />
+                        <span className="duration-200">All Tags</span>
                     </NavLink>
                 </div>
             </div>

@@ -25,7 +25,7 @@ export default function EditLinkModal({
     onRequestClose,
     ...props
 }) {
-    const [errors, setErrors] = useState(null);
+    const [errors, setErrors] = useState([]);
     const [tags, setTags] = useState(link?.tags);
 
     useEffect(() => setTags(link?.tags), [link?.tags]);
@@ -105,18 +105,17 @@ export default function EditLinkModal({
                         />
                     </div>
 
-                    {errors &&
-                        errors.map((error) => (
-                            <div
-                                className="py-2 px-4 mt-2 text-red-800 bg-red-200 rounded-md border border-red-800"
-                                key={error}
-                            >
-                                {error}
-                            </div>
-                        ))}
+                    {errors.map((error) => (
+                        <div
+                            className="py-2 px-4 mt-2 text-red-800 bg-red-200 rounded-md border border-red-800"
+                            key={error}
+                        >
+                            {error}
+                        </div>
+                    ))}
 
                     <input
-                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded cursor-pointer hover:bg-blue-500 duration-100"
+                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-100 cursor-pointer hover:bg-blue-500"
                         type="submit"
                         value="Save"
                     />

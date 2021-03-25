@@ -25,7 +25,7 @@ export default function LinksList({ queryParams, fetchOnRender = true }) {
     useEffect(() => {
         setLinks([]);
         setLoadOnScroll(true);
-    }, [queryParams]);
+    }, []);
 
     const fetchMoreLinks = () => {
         getLinks({ ...queryParams, offset: links.length })

@@ -97,7 +97,7 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                             </div>
                         ))}
                         <input
-                            className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded cursor-pointer hover:bg-blue-500 duration-100"
+                            className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-100 cursor-pointer hover:bg-blue-500"
                             type="submit"
                             value="Add"
                         />

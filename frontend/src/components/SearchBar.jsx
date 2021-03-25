@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { bigScreenMediaQuery } from "../utils";
 
 export default function SearchBar({ onSearch }) {
     const [query, setQuery] = useState("");
@@ -16,7 +15,6 @@ export default function SearchBar({ onSearch }) {
                 className="flex-grow flex-shrink py-2 px-4 min-w-0 rounded border border-gray-400 focus:border-blue-500"
                 type="text"
                 placeholder="Query"
-                autoFocus={bigScreenMediaQuery.matches}
                 required
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}

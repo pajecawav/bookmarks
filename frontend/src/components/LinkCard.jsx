@@ -5,16 +5,19 @@ import { ReactComponent as EditIcon } from "../icons/edit.svg";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 
-const getHostnameFromRegex = (url) => {
+const getHostnameFromURL = (url) => {
     const matches = url.match(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i);
     return matches && matches[1];
 };
 
-export function Tag({ name }) {
+export function Tag({ name, className, ...props }) {
     return (
         <div
-            key={name}
-            className="flex items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 cursor-pointer hover:text-black hover:bg-blue-200"
+            {...props}
+            className={clsx(
+                "flex items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 cursor-pointer hover:text-black hover:bg-blue-200",
+                className
+            )}
         >
             {name}
         </div>
@@ -38,7 +41,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                {getHostnameFromRegex(link.url)}
+                {getHostnameFromURL(link.url)}
             </a>
             <div className="flex flex-wrap gap-2 mt-3">
                 {link.tags.map((tag) => (
