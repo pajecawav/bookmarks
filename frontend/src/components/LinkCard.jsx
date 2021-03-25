@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 import { deleteLink, updateLink } from "../api";
 import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
 import { ReactComponent as EditIcon } from "../icons/edit.svg";
@@ -45,7 +46,9 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
             </a>
             <div className="flex flex-wrap gap-2 mt-3">
                 {link.tags.map((tag) => (
-                    <Tag name={tag.name} key={tag.name} />
+                    <Link to={`/tags/${tag.name}`} key={tag.name}>
+                        <Tag name={tag.name} />
+                    </Link>
                 ))}
             </div>
             <div className="flex gap-4 mt-3">
