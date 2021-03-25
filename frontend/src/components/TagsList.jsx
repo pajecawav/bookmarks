@@ -10,7 +10,10 @@ export default function TagsList() {
     useEffect(() => {
         if (tags === null) {
             getTags()
-                .then((availableTags) => setTags(availableTags))
+                .then((availableTags) => {
+                    availableTags.sort((a, b) => a.name > b.name);
+                    setTags(availableTags);
+                })
                 .catch((e) => console.error(e));
         }
     });
