@@ -3,7 +3,7 @@ from typing import Dict, Generator
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.engine import create_engine
-from sqlalchemy.orm.session import sessionmaker
+from sqlalchemy.orm.session import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from app import crud, schemas
@@ -42,12 +42,12 @@ app.dependency_overrides[get_db] = override_get_db
 
 
 @pytest.fixture(scope="session")
-def db() -> Generator:
+def db() -> Generator[Session, None, None]:
     yield TestingSessionLocal()
 
 
 @pytest.fixture(scope="module")
-def client() -> Generator:
+def client() -> Generator[TestClient, None, None]:
     with TestClient(app) as c:
         yield c
 

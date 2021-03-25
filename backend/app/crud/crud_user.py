@@ -21,7 +21,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         db.refresh(obj)
         return obj
 
-    def get_by_username(self, db: Session, *, username: str) -> User:
+    def get_by_username(self, db: Session, *, username: str) -> Optional[User]:
         user = db.query(self.model).filter(self.model.username == username).first()
         return user
 

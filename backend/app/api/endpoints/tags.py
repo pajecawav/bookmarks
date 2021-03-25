@@ -1,10 +1,10 @@
-from app import crud, models
-from app.api.dependencies import get_current_user, get_db
-from app import schemas
-from typing import List, Set
+from typing import List
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm.session import Session
 
+from app import models, schemas
+from app.api.dependencies import get_current_user, get_db
 
 router = APIRouter()
 

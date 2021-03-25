@@ -17,7 +17,7 @@ if settings.API_ROUTE:
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=token_url)
 
 
-def get_db() -> Generator:
+def get_db() -> Generator[Session, None, None]:
     try:
         db = SessionLocal()
         yield db
