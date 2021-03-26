@@ -24,8 +24,10 @@ export default function MainContent(props) {
             </Route>
             <Route
                 path="/tags/:tag"
-                key="singe-tag"
-                render={(props) => <TagLinksList {...props} />}
+                key="single-tag"
+                render={(props) => (
+                    <TagLinksList key={props.match.params.tag} {...props} />
+                )}
             />
         </Switch>
     );
