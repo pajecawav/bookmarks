@@ -9,20 +9,28 @@ services:
             - app-db-data:/var/lib/postgresql/data/pgdata
         environment:
             PGDATA: "/var/lib/postgresql/data/pgdata"
+        restart: unless-stopped
 
     backend:
-        build: ./backend
+        build:
+            context: ./backend
+            args:
+                INSTALL_DEV: ${INSTALL_DEV-false}
         depends_on:
             - db
         env_file:
             - backend/.env
+        environment:
+            WAIT_HOSTS: db:5432
+        restart: unless-stopped
 
     frontend:
         build: ./frontend
         depends_on:
             - backend
+        restart: unless-stopped
         ports:
-            - 3000:80
+            - ${PORT-3000}:80
 
 volumes:
     app-db-data:
