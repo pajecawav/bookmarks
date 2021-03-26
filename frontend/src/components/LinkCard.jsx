@@ -16,7 +16,7 @@ export function Tag({ name, className, ...props }) {
         <div
             {...props}
             className={clsx(
-                "flex items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 cursor-pointer hover:text-black hover:bg-blue-200",
+                "flex items-center px-3 h-6 text-sm text-gray-500 dark:text-white bg-gray-200 rounded-md duration-100 cursor-pointer hover:text-black hover:bg-blue-200 dark:bg-trueGray-700 dark:hover:bg-blue-200 dark:hover:text-trueGray-700",
                 className
             )}
         >
@@ -27,9 +27,9 @@ export function Tag({ name, className, ...props }) {
 
 export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
     return (
-        <div className="flex flex-col flex-grow pb-4 mb-4 min-h-full border-b-2">
+        <div className="flex flex-col flex-grow pb-4 mb-4 min-h-full border-b-2 dark:border-trueGray-700">
             <a
-                className="mb-1 text-xl duration-100 cursor-pointer hover:text-blue-500"
+                className="mb-1 text-xl duration-200 cursor-pointer hover:text-blue-500"
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -37,7 +37,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                 {link.title}
             </a>
             <a
-                className="text-base duration-100 cursor-pointer hover:text-blue-500 text-trueGray-500"
+                className="text-base duration-200 cursor-pointer hover:text-blue-500 text-trueGray-500"
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"

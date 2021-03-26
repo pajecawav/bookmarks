@@ -26,7 +26,7 @@ export default function TagsList() {
         <div className="px-4 my-6">
             <h1 className="text-xl font-medium">All Tags</h1>
             <input
-                className="py-2 px-4 mt-4 w-full min-w-0 rounded border border-gray-400 focus:border-blue-500"
+                className="py-2 px-4 mt-4 w-full min-w-0 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                 type="text"
                 placeholder="Filter tags"
                 value={query}

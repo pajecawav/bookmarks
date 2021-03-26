@@ -14,6 +14,7 @@ import {
     isLoggedIn,
     deleteLocalToken,
 } from "./utils";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 export let AppContext = createContext(null);
 
@@ -63,21 +64,27 @@ export default class App extends Component {
         }
 
         return (
-            <AppContext.Provider value={this}>
-                <Router>
-                    <Switch>
-                        <Route exact path="/login">
-                            {this.state.loggedIn ? (
-                                <Redirect to="/" />
-                            ) : (
-                                <Login onLogin={this.login} />
-                            )}
-                        </Route>
-                        {!this.state.loggedIn && <Redirect to="/login" />}
-                        <Route component={Home}></Route>
-                    </Switch>
-                </Router>
-            </AppContext.Provider>
+            <div className="min-h-screen min-w-screen dark:bg-trueGray-900 dark:text-gray-300">
+                <ThemeProvider>
+                    <AppContext.Provider value={this}>
+                        <Router>
+                            <Switch>
+                                <Route exact path="/login">
+                                    {this.state.loggedIn ? (
+                                        <Redirect to="/" />
+                                    ) : (
+                                        <Login onLogin={this.login} />
+                                    )}
+                                </Route>
+                                {!this.state.loggedIn && (
+                                    <Redirect to="/login" />
+                                )}
+                                <Route component={Home}></Route>
+                            </Switch>
+                        </Router>
+                    </AppContext.Provider>
+                </ThemeProvider>
+            </div>
         );
     }
 }

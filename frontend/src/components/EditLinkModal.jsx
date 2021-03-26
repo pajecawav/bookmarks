@@ -10,9 +10,11 @@ const customStyles = {
         left: "50%",
         right: "auto",
         bottom: "auto",
-        maxHeight: "90vh",
-        transform: "translate(-50%, -50%)",
-        backgroundColor: "white",
+        marginRight: "-50%",
+        transform: "translate(-50%, -100%)",
+        backgroundColor: "transparent",
+        padding: "0",
+        border: "none",
     },
     overlay: {
         backgroundColor: "#00000080",
@@ -54,8 +56,8 @@ export default function EditLinkModal({
             ariaHideApp={false}
             {...props}
         >
-            <>
-                <div className="flex justify-between pb-4 mb-4 w-full border-b-2">
+            <div className="p-4 bg-white dark:bg-trueGray-900 dark:text-gray-300">
+                <div className="flex justify-between pb-4 mb-4 w-full border-b-2 dark:border-trueGray-700">
                     <div className="text-xl font-bold">Edit Link</div>
                     <CloseIcon
                         className="cursor-pointer"
@@ -66,12 +68,12 @@ export default function EditLinkModal({
                     <div>
                         <label
                             htmlFor="title"
-                            className="inline-block mr-4 w-10 text-gray-700"
+                            className="inline-block mr-4 w-10 text-gray-700 dark:text-current"
                         >
                             Title
                         </label>
                         <input
-                            className="py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="text"
                             name="title"
                             defaultValue={link?.title}
@@ -82,12 +84,12 @@ export default function EditLinkModal({
                     <div>
                         <label
                             htmlFor="url"
-                            className="inline-block mr-4 w-10 text-gray-700"
+                            className="inline-block mr-4 w-10 text-gray-700 dark:text-current"
                         >
                             URL
                         </label>
                         <input
-                            className="py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="url"
                             name="url"
                             defaultValue={link?.url}
@@ -96,7 +98,7 @@ export default function EditLinkModal({
                         />
                     </div>
                     <div className="sm:flex">
-                        <label className="inline-block mr-4 w-10 text-gray-700">
+                        <label className="inline-block mr-4 w-10 text-gray-700 dark:text-current">
                             Tags
                         </label>
                         <TagsInput
@@ -115,12 +117,12 @@ export default function EditLinkModal({
                     ))}
 
                     <input
-                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-100 cursor-pointer hover:bg-blue-500"
+                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-200 cursor-pointer hover:bg-blue-500 dark:bg-trueGray-800 dark:hover:bg-blue-400 dark:hover:text-gray-800 hover:bg-blue-400"
                         type="submit"
                         value="Save"
                     />
                 </form>
-            </>
+            </div>
         </Modal>
     );
 }

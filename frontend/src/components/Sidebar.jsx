@@ -44,7 +44,7 @@ export default class Sidebar extends Component {
                         to="/"
                     >
                         <HomeIcon className="duration-200 group-hover:stroke-blue" />
-                        <span className="duration-200">My List</span>
+                        <div className="duration-200">My List</div>
                     </NavLink>
                     <NavLink
                         className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
@@ -52,7 +52,7 @@ export default class Sidebar extends Component {
                         to="/liked"
                     >
                         <HeartIcon className="duration-200 group-hover:stroke-blue" />
-                        <span className="duration-200">Liked</span>
+                        <div className="duration-200">Liked</div>
                     </NavLink>
                     <NavLink
                         className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
@@ -60,7 +60,7 @@ export default class Sidebar extends Component {
                         to="/archived"
                     >
                         <ArchiveIcon className="duration-200 group-hover:stroke-blue" />
-                        <span className="duration-200">Archive</span>
+                        <div className="duration-200">Archive</div>
                     </NavLink>
                     <NavLink
                         className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
@@ -68,7 +68,7 @@ export default class Sidebar extends Component {
                         to="/search"
                     >
                         <SearchIcon className="duration-200 group-hover:stroke-blue" />
-                        <span className="duration-200">Search</span>
+                        <div className="duration-200">Search</div>
                     </NavLink>
                     <div className="mt-2 text-gray-600">Tags</div>
                     <NavLink
@@ -78,7 +78,7 @@ export default class Sidebar extends Component {
                         exact
                     >
                         <TagIcon className="duration-200 group-hover:stroke-blue" />
-                        <span className="duration-200">All Tags</span>
+                        <div className="duration-200">All Tags</div>
                     </NavLink>
                 </div>
             </div>

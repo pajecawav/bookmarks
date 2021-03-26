@@ -37,7 +37,7 @@ export default function TagsInput(props) {
         return (
             <div
                 key={name}
-                className="flex gap-1 items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 hover:text-black hover:bg-blue-200 hover:cursor-default"
+                className="flex gap-1 items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 hover:text-black hover:bg-blue-200 hover:cursor-default dark:text-white dark:bg-trueGray-700 dark:hover:bg-blue-200 dark:hover:text-trueGray-700"
             >
                 {name}
                 <img
@@ -51,11 +51,12 @@ export default function TagsInput(props) {
     };
 
     return (
-        <div className="flex overflow-y-scroll flex-wrap gap-2 p-2 rounded border border-gray-400 sm:w-96">
+        <div className="flex flex-wrap gap-2 p-2 rounded border border-gray-400 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:focus:border-blue-500">
             {tags.map(renderTag)}
             <input
-                className="flex-grow w-10 border-gray-400 focus:border-blue-500"
+                className="flex-grow border-gray-400 min-w-2 focus:border-blue-500 dark:bg-trueGray-800 dark:placeholder-gray-500 "
                 type="text"
+                size={1}
                 value={currentTag}
                 onKeyDown={handleTagInput}
                 onChange={(event) => setCurrentTag(event.target.value)}
