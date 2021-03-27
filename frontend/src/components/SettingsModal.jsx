@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { useContext, useEffect, useRef } from "react";
-import { AppContext } from "../App";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { UserContext } from "../contexts/UserContext";
 
 export default function SettingsModal({ isOpen, onClose }) {
-    const app = useContext(AppContext);
+    const { logout } = useContext(UserContext);
     const selfRef = useRef(null);
     const { theme, setTheme } = useContext(ThemeContext);
     const themes = ["dark", "light"];
@@ -35,7 +35,7 @@ export default function SettingsModal({ isOpen, onClose }) {
         >
             <button
                 className="px-2 py-0.5 w-full text-left duration-200 hover:bg-blue-200 dark:hover:bg-blue-400 dark:hover:text-gray-800"
-                onClick={app.logout}
+                onClick={logout}
             >
                 Log out
             </button>
