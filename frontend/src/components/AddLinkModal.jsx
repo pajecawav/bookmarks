@@ -62,9 +62,9 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                         className="flex flex-col gap-4"
                         onSubmit={submitHandler}
                     >
-                        <div>
+                        <div className="flex items-center">
                             <label
-                                className="inline-block mr-4 w-10 text-gray-700 dark:text-current"
+                                className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
                                 htmlFor="add-title"
                             >
                                 Title
@@ -76,9 +76,9 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                                 placeholder="Title (Optional)"
                             />
                         </div>
-                        <div>
+                        <div className="flex items-center">
                             <label
-                                className="inline-block mr-4 w-10 text-gray-700 dark:text-current"
+                                className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
                                 htmlFor="add-url"
                             >
                                 URL

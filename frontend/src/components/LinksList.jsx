@@ -83,7 +83,7 @@ export default function LinksList({ queryParams, fetchOnRender = true }) {
                 />
             )}
             {!hasLinks && (
-                <div className="flex justify-center items-center mx-4 h-48 border-b">
+                <div className="flex justify-center items-center mx-4 h-48 border-b dark:border-trueGray-700">
                     <h1 className="text-xl text-gray-500">No links.</h1>
                 </div>
             )}

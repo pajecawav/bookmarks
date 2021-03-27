@@ -1,5 +1,5 @@
 import { useState } from "react";
-import close from "../icons/close.svg";
+import { ReactComponent as CloseIcon } from "../icons/close.svg";
 
 export default function TagsInput(props) {
     const [tags, setTags] = useState(props.tags || []);
@@ -40,9 +40,8 @@ export default function TagsInput(props) {
                 className="flex gap-1 items-center px-3 h-6 text-sm text-gray-500 bg-gray-200 rounded-md duration-100 hover:text-black hover:bg-blue-200 hover:cursor-default dark:text-white dark:bg-trueGray-700 dark:hover:bg-blue-200 dark:hover:text-trueGray-700"
             >
                 {name}
-                <img
-                    src={close}
-                    className="h-4 cursor-pointer"
+                <CloseIcon
+                    className="h-4 cursor-pointer fill-current"
                     alt="close"
                     onClick={() => removeTag(name)}
                 />
