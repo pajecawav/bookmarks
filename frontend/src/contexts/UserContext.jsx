@@ -11,10 +11,14 @@ export const UserContext = createContext();
 
 export function UserProvider({ children }) {
     const [username, setUsername] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(null);
 
     useEffect(() => {
-        isLoggedIn().then((loggedIn) => {
-            setUsername(getLocalUsername());
+        isLoggedIn().then((loggedIn_) => {
+            if (loggedIn_) {
+                setUsername(getLocalUsername());
+            }
+            setLoggedIn(loggedIn_);
         });
     }, []);
 
@@ -22,15 +26,17 @@ export function UserProvider({ children }) {
         saveLocalToken(token);
         saveLocalUsername(username);
         setUsername(username);
+        setLoggedIn(true);
     };
 
     const logout = () => {
         deleteLocalToken();
         setUsername(null);
+        setLoggedIn(false);
     };
 
     return (
-        <UserContext.Provider value={{ username, logout, login }}>
+        <UserContext.Provider value={{ username, loggedIn, logout, login }}>
             {children}
         </UserContext.Provider>
     );

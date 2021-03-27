@@ -7,7 +7,7 @@ export let AppContext = createContext(null);
 
 export default function App() {
     return (
-        <div className="min-h-screen min-w-screen dark:bg-trueGray-900 dark:text-gray-300">
+        <div className="flex min-h-screen min-w-screen dark:bg-trueGray-900 dark:text-gray-300">
             <ThemeProvider>
                 <UserProvider>
                     <MainRouter />

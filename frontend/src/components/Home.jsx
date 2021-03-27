@@ -17,7 +17,7 @@ export default function Home({ location }) {
     return (
         <div
             className={clsx(
-                "flex m-auto max-w-3xl",
+                "flex flex-grow mx-auto max-w-3xl",
                 !sidebarHidden &&
                     !bigScreenMediaQuery.matches &&
                     "h-screen overflow-hidden"

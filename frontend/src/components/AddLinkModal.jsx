@@ -64,7 +64,7 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                     >
                         <div className="flex items-center">
                             <label
-                                className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
+                                className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
                                 htmlFor="add-title"
                             >
                                 Title
@@ -78,7 +78,7 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                         </div>
                         <div className="flex items-center">
                             <label
-                                className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
+                                className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
                                 htmlFor="add-url"
                             >
                                 URL

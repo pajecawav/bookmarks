@@ -69,7 +69,7 @@ export default function EditLinkModal({
                     <div className="flex items-center">
                         <label
                             htmlFor="title"
-                            className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
+                            className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
                         >
                             Title
                         </label>
@@ -86,7 +86,7 @@ export default function EditLinkModal({
                     <div className="flex items-center">
                         <label
                             htmlFor="url"
-                            className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
+                            className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
                         >
                             URL
                         </label>
@@ -101,7 +101,7 @@ export default function EditLinkModal({
                         />
                     </div>
                     <div className="flex items-center">
-                        <label className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current">
+                        <label className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current">
                             Tags
                         </label>
                         <div className="flex-grow sm:w-96">

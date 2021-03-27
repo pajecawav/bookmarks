@@ -51,7 +51,7 @@ function Login({ history }) {
     };
 
     return (
-        <div className="flex h-screen">
+        <div className="m-auto">
             <form
                 className="flex flex-col gap-y-5 px-8 pt-6 pb-8 m-auto w-72 w-80 bg-white rounded-2xl border-2 shadow-md dark:bg-trueGray-900 dark:border-trueGray-800"
                 onSubmit={handleLogin}
