@@ -28,7 +28,7 @@ export default class Sidebar extends Component {
         return (
             <div
                 className={clsx(
-                    "flex flex-col pt-4 fixed border-r-2 sm:border-r-0 gap-3 w-48 h-full px-4 transform transition-transform duration-300",
+                    "flex flex-col pt-4 fixed border-r-2 sm:border-r-0 dark:border-trueGray-800 gap-3 w-48 h-full px-4 transform transition-transform duration-300",
                     this.state.hidden && "-translate-x-48"
                 )}
             >

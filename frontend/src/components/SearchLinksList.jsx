@@ -13,7 +13,7 @@ export default function SearchLinksList() {
                 }}
             />
             <LinksList
-                key="search"
+                key={queryParams.query}
                 queryParams={queryParams}
                 fetchOnRender={false}
             />

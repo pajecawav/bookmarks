@@ -7,24 +7,35 @@ import TagsList from "./TagsList";
 export default function MainContent(props) {
     return (
         <Switch>
-            <Route exact path="/" key="all">
-                <LinksList queryParams={{}} {...props} />
+            <Route exact path="/">
+                <LinksList key="all" queryParams={{}} {...props} />
             </Route>
-            <Route path="/liked" key="liked">
-                <LinksList queryParams={{ liked: true }} {...props} />
+            <Route path="/liked">
+                <LinksList
+                    key="liked"
+                    queryParams={{ liked: true }}
+                    {...props}
+                />
             </Route>
-            <Route path="/archived" key="archived">
-                <LinksList queryParams={{ archived: true }} {...props} />
+            <Route path="/archived">
+                <LinksList
+                    key="archived"
+                    queryParams={{ archived: true }}
+                    {...props}
+                />
             </Route>
-            <Route path="/search" key="search">
-                <SearchLinksList fetchOnRender={false} {...props} />
+            <Route path="/search">
+                <SearchLinksList
+                    key="search"
+                    fetchOnRender={false}
+                    {...props}
+                />
             </Route>
-            <Route exact path="/tags" key="tags">
-                <TagsList {...props} />
+            <Route exact path="/tags">
+                <TagsList key="tags" {...props} />
             </Route>
             <Route
                 path="/tags/:tag"
-                key="single-tag"
                 render={(props) => (
                     <TagLinksList key={props.match.params.tag} {...props} />
                 )}

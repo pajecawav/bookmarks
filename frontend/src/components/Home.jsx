@@ -15,7 +15,14 @@ export default function Home({ location }) {
     const [message, setMessage] = useState(urlParams.get("message"));
 
     return (
-        <div className="flex m-auto max-w-3xl">
+        <div
+            className={clsx(
+                "flex m-auto max-w-3xl",
+                !sidebarHidden &&
+                    !bigScreenMediaQuery.matches &&
+                    "h-screen overflow-hidden"
+            )}
+        >
             <Sidebar hidden={sidebarHidden} />
             <div
                 className={clsx(

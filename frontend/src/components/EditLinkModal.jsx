@@ -11,10 +11,11 @@ const customStyles = {
         right: "auto",
         bottom: "auto",
         marginRight: "-50%",
-        transform: "translate(-50%, -100%)",
+        transform: "translate(-50%, -50%)",
         backgroundColor: "transparent",
         padding: "0",
         border: "none",
+        maxWidth: "90%",
     },
     overlay: {
         backgroundColor: "#00000080",
@@ -56,7 +57,7 @@ export default function EditLinkModal({
             ariaHideApp={false}
             {...props}
         >
-            <div className="p-4 bg-white dark:bg-trueGray-900 dark:text-gray-300">
+            <div className="p-4 bg-white sm:w-96 dark:bg-trueGray-900 dark:text-gray-300">
                 <div className="flex justify-between pb-4 mb-4 w-full border-b-2 dark:border-trueGray-700">
                     <div className="text-xl font-bold">Edit Link</div>
                     <CloseIcon
@@ -65,46 +66,50 @@ export default function EditLinkModal({
                     />
                 </div>
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <div>
+                    <div className="flex items-center">
                         <label
                             htmlFor="title"
-                            className="inline-block mr-4 w-10 text-gray-700 dark:text-current"
+                            className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
                         >
                             Title
                         </label>
                         <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="text"
                             name="title"
                             defaultValue={link?.title}
                             placeholder="Title"
+                            size={1}
                             required
                         />
                     </div>
-                    <div>
+                    <div className="flex items-center">
                         <label
                             htmlFor="url"
-                            className="inline-block mr-4 w-10 text-gray-700 dark:text-current"
+                            className="flex-shrink-0 inline-block mr-4 w-8 text-gray-700 dark:text-current"
                         >
                             URL
                         </label>
                         <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="url"
                             name="url"
                             defaultValue={link?.url}
                             placeholder="URL"
+                            size={1}
                             required
                         />
                     </div>
-                    <div className="sm:flex">
-                        <label className="inline-block mr-4 w-10 text-gray-700 dark:text-current">
+                    <div className="flex items-center">
+                        <label className="inline-block mr-4 w-8 text-gray-700 dark:text-current">
                             Tags
                         </label>
-                        <TagsInput
-                            tags={tags}
-                            onTagsUpdate={(newTags) => setTags(newTags)}
-                        />
+                        <div className="flex-grow">
+                            <TagsInput
+                                tags={tags}
+                                onTagsUpdate={(newTags) => setTags(newTags)}
+                            />
+                        </div>
                     </div>
 
                     {errors.map((error) => (

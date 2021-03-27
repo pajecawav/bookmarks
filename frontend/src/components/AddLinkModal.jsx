@@ -10,10 +10,11 @@ const customStyles = {
         right: "auto",
         bottom: "auto",
         marginRight: "-50%",
-        transform: "translate(-50%, -100%)",
+        transform: "translate(-50%, -50%)",
         backgroundColor: "transparent",
         padding: "0",
         border: "none",
+        maxWidth: "90%",
     },
     overlay: {
         backgroundColor: "#00000080",
