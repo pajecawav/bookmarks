@@ -8,7 +8,11 @@ export default function MainContent(props) {
     return (
         <Switch>
             <Route exact path="/">
-                <LinksList key="all" queryParams={{}} {...props} />
+                <LinksList
+                    key="all"
+                    queryParams={{ archived: false }}
+                    {...props}
+                />
             </Route>
             <Route path="/liked">
                 <LinksList
