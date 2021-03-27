@@ -16,4 +16,4 @@ if settings.BACKEND_CORS_ORIGINS:
     )
 
 
-app.include_router(api.api_router, prefix=settings.API_ROUTE)
+app.include_router(api.api_router)

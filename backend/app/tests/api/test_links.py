@@ -3,7 +3,6 @@ from typing import Dict
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from app.config import settings
 from app.tests.utils import (
     create_random_link,
     create_random_user,
@@ -18,7 +17,7 @@ def test_create_link(client: TestClient, db: Session) -> None:
     title = random_lower_string()
     url = "https://example.com"
     data = {"title": title, "url": url}
-    response = client.post(f"{settings.API_ROUTE}/links", json=data, headers=headers)
+    response = client.post("/links", json=data, headers=headers)
     assert response.status_code == 200
     json = response.json()
     assert json["title"] == title
@@ -31,9 +30,7 @@ def test_read_link(
     client: TestClient, db: Session, superuser_headers: Dict[str, str]
 ) -> None:
     link = create_random_link(db)
-    response = client.get(
-        f"{settings.API_ROUTE}/links/{link.id}", headers=superuser_headers
-    )
+    response = client.get(f"/links/{link.id}", headers=superuser_headers)
     assert response.status_code == 200
     json = response.json()
     assert json["title"] == link.title
@@ -54,9 +51,7 @@ def test_update_link(
         "liked": not link.liked,
         "archived": not link.archived,
     }
-    response = client.post(
-        f"{settings.API_ROUTE}/links/{link.id}", headers=superuser_headers, json=data
-    )
+    response = client.post(f"/links/{link.id}", headers=superuser_headers, json=data)
     assert response.status_code == 200
     link2 = response.json()
     assert link2["title"] == data["title"]

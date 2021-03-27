@@ -6,7 +6,6 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
-from app.config import settings
 
 
 def random_lower_string(k: int = 10) -> str:
@@ -33,7 +32,7 @@ def get_user_auth_headers(
     username: str, password: str, client: TestClient
 ) -> Dict[str, str]:
     data = {"username": username, "password": password}
-    response = client.post(f"{settings.API_ROUTE}/login/token", data=data)
+    response = client.post("/login/token", data=data)
     token = response.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
     return headers

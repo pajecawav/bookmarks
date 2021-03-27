@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from app import crud, schemas
 from app.config import settings
 from app.db import base  # noqa: F401
-from app.db.database import Base, SessionLocal, engine
+from app.db.database import Base, SessionLocal, engine  # noqa
 
 
 def init_db(db: Session) -> None:
