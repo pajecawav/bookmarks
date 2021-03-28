@@ -6,6 +6,7 @@ import LinkCard from "./LinkCard";
 
 export default function LinksList({ queryParams, fetchOnRender = true }) {
     const [links, setLinks] = useState([]);
+    const [nextCursor, setNextCursor] = useState(null);
     const [loadOnScroll, setLoadOnScroll] = useState(fetchOnRender);
     const [editingLink, setEditingLink] = useState(null);
     const loader = useRef(null);
@@ -25,14 +26,16 @@ export default function LinksList({ queryParams, fetchOnRender = true }) {
     useEffect(() => {
         setLinks([]);
         setLoadOnScroll(true);
+        setNextCursor(null);
     }, []);
 
     const fetchMoreLinks = () => {
-        getLinks({ ...queryParams, offset: links.length })
-            .then((newLinks) => {
-                const extendedLinks = [...links, ...newLinks];
+        getLinks({ ...queryParams, cursor: nextCursor })
+            .then((response) => {
+                const extendedLinks = [...links, ...response.links];
                 setLinks(extendedLinks);
-                setLoadOnScroll(newLinks.length !== 0);
+                setLoadOnScroll(!!response.next_cursor);
+                setNextCursor(response.next_cursor);
             })
             .catch((e) => console.error(e));
     };

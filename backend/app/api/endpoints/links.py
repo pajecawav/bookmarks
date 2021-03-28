@@ -46,17 +46,20 @@ def fetch_link_title(link: models.Link, db: Session) -> None:
         db.commit()
 
 
-@router.get("", response_model=List[schemas.Link])
+@router.get("", response_model=schemas.LinksResponse)
 def get_links(
     query: Optional[str] = None,
     liked: Optional[bool] = None,
     archived: Optional[bool] = None,
     tags: Optional[List[str]] = Query(None),
-    offset: int = 0,
+    cursor: Optional[int] = None,
     limit: int = 20,
     current_user: models.User = Depends(get_current_user),
 ):
     links = current_user.links
+
+    if cursor:
+        links = links.filter(models.Link.id <= cursor)
 
     if tags:
         links = links.join(models.Link.tags).filter(models.Tag.name.in_(tags))
@@ -70,7 +73,12 @@ def get_links(
     if query is not None:
         links = links.filter(models.Link.title.ilike(f"%{query}%"))
 
-    return links.offset(offset).limit(limit).all()
+    links_result = links.limit(limit + 1).all()
+    next_cursor = None
+    if len(links_result) == limit + 1:
+        next_cursor = links_result.pop().id
+
+    return {"links": links_result, "next_cursor": next_cursor}
 
 
 @router.get("/{link_id}", response_model=schemas.Link)

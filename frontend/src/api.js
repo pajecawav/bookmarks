@@ -54,6 +54,8 @@ export async function testToken() {
 }
 
 export async function getLinks(params = {}) {
+    if (!params.cursor) delete params.cursor;
+
     const response = await fetch(`/api/links?${encodeGetParams(params)}`, {
         headers: getAuthHeaders(),
     });

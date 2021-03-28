@@ -24,6 +24,11 @@ class Link(BaseModel):
         orm_mode = True
 
 
+class LinksResponse(BaseModel):
+    links: List[Link]
+    next_cursor: Optional[int]
+
+
 class LinkUpdate(BaseModel):
     url: Optional[HttpUrl]
     title: Optional[str]
