@@ -16,4 +16,10 @@ export const isLoggedIn = async () => {
     return await testToken();
 };
 
+export const getLocalPinnedTags = () =>
+    JSON.parse(localStorage.getItem("pinned-tags"));
+
+export const setLocalPinnedTags = (tags) =>
+    localStorage.setItem("pinned-tags", JSON.stringify(tags));
+
 export const bigScreenMediaQuery = window.matchMedia("(min-width: 640px)");
