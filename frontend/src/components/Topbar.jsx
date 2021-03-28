@@ -28,7 +28,11 @@ export default function Topbar({ onToggleSidebar }) {
                 <div>
                     <div
                         className="duration-200 cursor-pointer hover:text-blue-500"
-                        onClick={() => setSettingsOpen(!settingsOpen)}
+                        onClick={() => {
+                            if (!settingsOpen) {
+                                setSettingsOpen(!settingsOpen);
+                            }
+                        }}
                     >
                         {username}
                     </div>
