@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
-import { updateLink } from "../api";
-import { ReactComponent as CloseIcon } from "../icons/close.svg";
-import TagsInput from "./TagsInput";
+import { addLink } from "../../api";
+import { ReactComponent as CloseIcon } from "../../icons/close.svg";
 
 const customStyles = {
     content: {
@@ -23,109 +22,86 @@ const customStyles = {
     },
 };
 
-export default function EditLinkModal({
-    link,
-    onUpdate,
-    onRequestClose,
-    ...props
-}) {
+export default function AddLinkModal({ onRequestClose, isOpen }) {
     const [errors, setErrors] = useState([]);
-    const [tags, setTags] = useState(link?.tags);
 
-    useEffect(() => setTags(link?.tags), [link?.tags]);
-
-    const handleSubmit = async (event) => {
+    const submitHandler = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
-        await updateLink(link.id, {
-            title: data.get("title"),
-            url: data.get("url"),
-            tags,
+        addLink({
+            title: data.get("add-title") || null,
+            url: data.get("add-url"),
         })
             .then((link) => {
-                onUpdate(link);
                 onRequestClose();
+                setErrors([]);
             })
-            .catch((errors) => {
-                setErrors(errors.map((e) => e.msg));
+            .catch((error) => {
+                setErrors(error.map((e) => e.msg));
             });
     };
 
     return (
         <Modal
+            isOpen={isOpen}
             onRequestClose={onRequestClose}
             style={customStyles}
             ariaHideApp={false}
-            {...props}
+            closeTimeoutMS={200}
         >
             <div className="p-4 bg-white dark:bg-trueGray-900 dark:text-gray-300">
                 <div className="flex justify-between pb-4 mb-4 w-full border-b-2 dark:border-trueGray-700">
-                    <div className="text-xl font-bold">Edit Link</div>
+                    <div className="text-xl font-bold">Add Link</div>
                     <CloseIcon
                         className="cursor-pointer"
                         onClick={onRequestClose}
                     />
                 </div>
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+
+                <form className="flex flex-col gap-4" onSubmit={submitHandler}>
                     <div className="flex items-center">
                         <label
-                            htmlFor="title"
                             className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
+                            htmlFor="add-title"
                         >
                             Title
                         </label>
                         <input
                             className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="text"
-                            name="title"
-                            defaultValue={link?.title}
-                            placeholder="Title"
+                            name="add-title"
+                            placeholder="Title (Optional)"
                             size={1}
-                            required
                         />
                     </div>
                     <div className="flex items-center">
                         <label
-                            htmlFor="url"
                             className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
+                            htmlFor="add-url"
                         >
                             URL
                         </label>
                         <input
                             className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="url"
-                            name="url"
-                            defaultValue={link?.url}
-                            placeholder="URL"
+                            name="add-url"
+                            placeholder="Enter URL"
                             size={1}
                             required
                         />
                     </div>
-                    <div className="flex items-center">
-                        <label className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current">
-                            Tags
-                        </label>
-                        <div className="flex-grow">
-                            <TagsInput
-                                tags={tags}
-                                onTagsUpdate={(newTags) => setTags(newTags)}
-                            />
-                        </div>
-                    </div>
-
                     {errors.map((error) => (
                         <div
-                            className="py-2 px-4 mt-2 text-red-800 bg-red-200 rounded-md border border-red-800"
+                            className="py-2 px-4 text-red-800 bg-red-200 rounded-md border border-red-800"
                             key={error}
                         >
                             {error}
                         </div>
                     ))}
-
                     <input
                         className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-200 cursor-pointer hover:bg-blue-500 dark:bg-trueGray-800 dark:hover:bg-blue-400 dark:hover:text-gray-800 hover:bg-blue-400"
                         type="submit"
-                        value="Save"
+                        value="Add"
                     />
                 </form>
             </div>

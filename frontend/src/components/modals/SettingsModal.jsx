@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useContext, useEffect, useRef } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
-import { UserContext } from "../contexts/UserContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { UserContext } from "../../contexts/UserContext";
 
 export default function SettingsModal({ isOpen, onClose }) {
     const { logout } = useContext(UserContext);

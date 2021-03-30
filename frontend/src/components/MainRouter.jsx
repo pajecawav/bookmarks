@@ -1,15 +1,15 @@
 import { useContext } from "react";
-import { ReactComponent as SpinnerIcon } from "../icons/spinner.svg";
 import {
     BrowserRouter as Router,
+    Redirect,
     Route,
     Switch,
-    Redirect,
 } from "react-router-dom";
-import Login from "./Login";
-import Home from "./Home";
-
 import { UserContext } from "../contexts/UserContext";
+import { ReactComponent as SpinnerIcon } from "../icons/spinner.svg";
+import ShareTarget from "../ShareTarget";
+import Home from "./Home";
+import Login from "./Login";
 
 export default function MainRouter() {
     const { loggedIn } = useContext(UserContext);
@@ -28,6 +28,7 @@ export default function MainRouter() {
                     {loggedIn === false && <Login />}
                 </Route>
                 {loggedIn === false && <Redirect to="/login" />}
+                <Route path="/_share" component={ShareTarget}></Route>
                 <Route component={Home}></Route>
             </Switch>
         </Router>

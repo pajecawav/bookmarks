@@ -10,7 +10,6 @@ export default function Home({ location }) {
     const [sidebarHidden, setSidebarHidden] = useState(
         !bigScreenMediaQuery.matches
     );
-
     const urlParams = new URLSearchParams(location.search);
     const [message, setMessage] = useState(urlParams.get("message"));
 

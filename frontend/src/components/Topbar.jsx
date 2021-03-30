@@ -1,8 +1,8 @@
 import { React, useState } from "react";
 import { ReactComponent as MenuIcon } from "../icons/menu.svg";
 import { getLocalUsername } from "../utils";
-import AddLinkModal from "./AddLinkModal";
-import SettingsModal from "./SettingsModal";
+import AddLinkModal from "./modals/AddLinkModal";
+import SettingsModal from "./modals/SettingsModal";
 
 export default function Topbar({ onToggleSidebar }) {
     const [addingLink, setAddingLink] = useState(false);

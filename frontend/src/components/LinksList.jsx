@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getLinks } from "../api";
 import { ReactComponent as SpinnerIcon } from "../icons/spinner.svg";
-import EditLinkModal from "./EditLinkModal";
+import EditLinkModal from "./modals/EditLinkModal";
 import LinkCard from "./LinkCard";
 
 export default function LinksList({ queryParams, fetchOnRender = true }) {
