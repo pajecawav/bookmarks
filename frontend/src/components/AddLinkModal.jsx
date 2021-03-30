@@ -14,6 +14,7 @@ const customStyles = {
         backgroundColor: "transparent",
         padding: "0",
         border: "none",
+        width: "28rem",
         maxWidth: "90%",
     },
     overlay: {
@@ -57,55 +58,52 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                     />
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    <form
-                        className="flex flex-col gap-4"
-                        onSubmit={submitHandler}
-                    >
-                        <div className="flex items-center">
-                            <label
-                                className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
-                                htmlFor="add-title"
-                            >
-                                Title
-                            </label>
-                            <input
-                                className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
-                                type="text"
-                                name="add-title"
-                                placeholder="Title (Optional)"
-                            />
-                        </div>
-                        <div className="flex items-center">
-                            <label
-                                className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
-                                htmlFor="add-url"
-                            >
-                                URL
-                            </label>
-                            <input
-                                className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
-                                type="url"
-                                name="add-url"
-                                placeholder="Enter URL"
-                                required
-                            />
-                        </div>
-                        {errors.map((error) => (
-                            <div
-                                className="py-2 px-4 text-red-800 bg-red-200 rounded-md border border-red-800"
-                                key={error}
-                            >
-                                {error}
-                            </div>
-                        ))}
+                <form className="flex flex-col gap-4" onSubmit={submitHandler}>
+                    <div className="flex items-center">
+                        <label
+                            className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
+                            htmlFor="add-title"
+                        >
+                            Title
+                        </label>
                         <input
-                            className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-200 cursor-pointer hover:bg-blue-500 dark:bg-trueGray-800 dark:hover:bg-blue-400 dark:hover:text-gray-800 hover:bg-blue-400"
-                            type="submit"
-                            value="Add"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                            type="text"
+                            name="add-title"
+                            placeholder="Title (Optional)"
+                            size={1}
                         />
-                    </form>
-                </div>
+                    </div>
+                    <div className="flex items-center">
+                        <label
+                            className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
+                            htmlFor="add-url"
+                        >
+                            URL
+                        </label>
+                        <input
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                            type="url"
+                            name="add-url"
+                            placeholder="Enter URL"
+                            size={1}
+                            required
+                        />
+                    </div>
+                    {errors.map((error) => (
+                        <div
+                            className="py-2 px-4 text-red-800 bg-red-200 rounded-md border border-red-800"
+                            key={error}
+                        >
+                            {error}
+                        </div>
+                    ))}
+                    <input
+                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-200 cursor-pointer hover:bg-blue-500 dark:bg-trueGray-800 dark:hover:bg-blue-400 dark:hover:text-gray-800 hover:bg-blue-400"
+                        type="submit"
+                        value="Add"
+                    />
+                </form>
             </div>
         </Modal>
     );

@@ -1,10 +1,7 @@
-import { createContext, React } from "react";
 import MainRouter from "./components/MainRouter";
+import { PinnedTagsProvider } from "./contexts/PinnedTagsContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { UserProvider } from "./contexts/UserContext";
-import { PinnedTagsProvider } from "./contexts/PinnedTagsContext";
-
-export let AppContext = createContext(null);
 
 export default function App() {
     return (

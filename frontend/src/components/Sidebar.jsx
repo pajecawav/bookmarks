@@ -29,7 +29,7 @@ export default function Sidebar({ hidden }) {
                     exact
                     to="/"
                 >
-                    <HomeIcon className="duration-200 group-hover:stroke-blue" />
+                    <HomeIcon className="duration-200 group-hover:stroke-blue-500" />
                     <div className="duration-200">My List</div>
                 </NavLink>
                 <NavLink
@@ -37,7 +37,7 @@ export default function Sidebar({ hidden }) {
                     activeClassName="font-bold text-blue-500"
                     to="/liked"
                 >
-                    <HeartIcon className="duration-200 group-hover:stroke-blue" />
+                    <HeartIcon className="duration-200 group-hover:stroke-blue-500" />
                     <div className="duration-200">Liked</div>
                 </NavLink>
                 <NavLink
@@ -45,7 +45,7 @@ export default function Sidebar({ hidden }) {
                     activeClassName="font-bold text-blue-500"
                     to="/archived"
                 >
-                    <ArchiveIcon className="duration-200 group-hover:stroke-blue" />
+                    <ArchiveIcon className="duration-200 group-hover:stroke-blue-500" />
                     <div className="duration-200">Archive</div>
                 </NavLink>
                 <NavLink
@@ -53,7 +53,7 @@ export default function Sidebar({ hidden }) {
                     activeClassName="font-bold text-blue-500"
                     to="/search"
                 >
-                    <SearchIcon className="duration-200 group-hover:stroke-blue" />
+                    <SearchIcon className="duration-200 group-hover:stroke-blue-500" />
                     <div className="duration-200">Search</div>
                 </NavLink>
 
@@ -65,12 +65,12 @@ export default function Sidebar({ hidden }) {
                         to="/tags"
                         exact
                     >
-                        <TagIcon className="duration-200 group-hover:stroke-blue" />
+                        <TagIcon className="duration-200 group-hover:stroke-blue-500" />
                         <div className="duration-200">All Tags</div>
                     </NavLink>
                     {pinnedTags.map((tag) => (
                         <NavLink
-                            className="cursor-pointer hover:text-blue-500 duration-200"
+                            className="duration-200 cursor-pointer hover:text-blue-500"
                             activeClassName="font-bold text-blue-500"
                             to={`/tags/${tag}`}
                             key={tag}

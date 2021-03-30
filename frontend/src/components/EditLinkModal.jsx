@@ -15,6 +15,7 @@ const customStyles = {
         backgroundColor: "transparent",
         padding: "0",
         border: "none",
+        width: "28rem",
         maxWidth: "90%",
     },
     overlay: {
@@ -65,7 +66,7 @@ export default function EditLinkModal({
                         onClick={onRequestClose}
                     />
                 </div>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <div className="flex items-center">
                         <label
                             htmlFor="title"
@@ -74,7 +75,7 @@ export default function EditLinkModal({
                             Title
                         </label>
                         <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="text"
                             name="title"
                             defaultValue={link?.title}
@@ -91,7 +92,7 @@ export default function EditLinkModal({
                             URL
                         </label>
                         <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 sm:w-96 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
                             type="url"
                             name="url"
                             defaultValue={link?.url}
@@ -104,7 +105,7 @@ export default function EditLinkModal({
                         <label className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current">
                             Tags
                         </label>
-                        <div className="flex-grow sm:w-96">
+                        <div className="flex-grow">
                             <TagsInput
                                 tags={tags}
                                 onTagsUpdate={(newTags) => setTags(newTags)}

@@ -53,7 +53,7 @@ export default function TagsInput(props) {
         <div className="flex flex-wrap gap-2 p-2 rounded border border-gray-400 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:focus:border-blue-500">
             {tags.map(renderTag)}
             <input
-                className="flex-grow border-gray-400 min-w-2 focus:border-blue-500 dark:bg-trueGray-800 dark:placeholder-gray-500 "
+                className="flex-grow border-gray-400 min-w-2 focus:border-blue-500 dark:bg-trueGray-800 dark:placeholder-gray-500"
                 type="text"
                 size={1}
                 value={currentTag}

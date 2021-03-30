@@ -25,7 +25,7 @@ export default function TagLinksList({ match, ...props }) {
                 <PinIcon
                     className={clsx(
                         "cursor-pointer duration-200",
-                        pinned ? "fill-blue" : "hover:stroke-blue"
+                        pinned ? "fill-blue-200" : "hover:stroke-blue-500"
                     )}
                     onClick={togglePinned}
                 />

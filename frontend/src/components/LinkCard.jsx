@@ -5,6 +5,7 @@ import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
 import { ReactComponent as EditIcon } from "../icons/edit.svg";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
+import { ReactComponent as SendIcon } from "../icons/send.svg";
 
 const getHostnameFromURL = (url) => {
     const matches = url.match(/^https?:\/\/([^/?#]+)(?:[/?#]|$)/i);
@@ -26,6 +27,10 @@ export function Tag({ name, className, ...props }) {
 }
 
 export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
+    const handleShare = () => {
+        navigator.share({ title: link.title, url: link.url });
+    };
+
     return (
         <div className="flex flex-col flex-grow pb-4 mb-4 min-h-full border-b-2 dark:border-trueGray-700">
             <a
@@ -44,6 +49,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
             >
                 {getHostnameFromURL(link.url)}
             </a>
+
             <div className="flex flex-wrap gap-2 mt-3">
                 {link.tags.map((tag) => (
                     <Link to={`/tags/${tag.name}`} key={tag.name}>
@@ -51,13 +57,14 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                     </Link>
                 ))}
             </div>
+
             <div className="flex gap-4 mt-3">
                 <HeartIcon
                     className={clsx(
-                        "cursor-pointer rounded duration-200",
+                        "w-6 h-6 rounded duration-200 cursor-pointer sm:w-5 sm:h-5 hover:stroke-blue-500",
                         link.liked
-                            ? "fill-blue text-gray-600"
-                            : "hover:stroke-blue"
+                            ? "fill-blue-200 text-gray-600"
+                            : "dark:fill-trueGray-900 fill-white hover:stroke-blue-500"
                     )}
                     alt="toggle liked"
                     onClick={() => {
@@ -70,10 +77,10 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
 
                 <ArchiveIcon
                     className={clsx(
-                        "cursor-pointer rounded duration-200",
+                        "w-6 h-6 rounded duration-200 cursor-pointer sm:w-5 sm:h-5 hover:stroke-blue-500",
                         link.archived
-                            ? "fill-blue text-gray-600"
-                            : "hover:stroke-blue"
+                            ? "fill-blue-200 text-gray-600"
+                            : "dark:fill-trueGray-900 fill-white hover:stroke-blue-500"
                     )}
                     alt="archive"
                     onClick={() => {
@@ -90,7 +97,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                 />
 
                 <EditIcon
-                    className="rounded duration-200 cursor-pointer hover:stroke-blue"
+                    className="w-6 h-6 rounded duration-200 cursor-pointer sm:w-5 sm:h-5 hover:stroke-blue-500"
                     alt="edit"
                     onClick={() => {
                         onEdit(link);
@@ -98,7 +105,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                 />
 
                 <TrashIcon
-                    className="rounded duration-200 cursor-pointer hover:stroke-blue"
+                    className="w-6 h-6 rounded duration-200 cursor-pointer sm:w-5 sm:h-5 hover:stroke-blue-500"
                     alt="delete"
                     onClick={() => {
                         deleteLink(link.id)
@@ -106,6 +113,14 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                             .catch((e) => console.error(e));
                     }}
                 />
+
+                {navigator.share && (
+                    <SendIcon
+                        className="w-6 h-6 rounded duration-200 cursor-pointer sm:w-5 sm:h-5 hover:stroke-blue-500"
+                        alt="share"
+                        onClick={handleShare}
+                    />
+                )}
             </div>
         </div>
     );

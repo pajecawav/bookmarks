@@ -26,7 +26,7 @@ export default function Home({ location }) {
             <Sidebar hidden={sidebarHidden} />
             <div
                 className={clsx(
-                    "w-full transform transition-all duration-300",
+                    "w-full transform transition-transform duration-300",
                     sidebarHidden
                         ? "ml-0"
                         : "sm:ml-48 sm:translate-x-0 ml-0 translate-x-48"
@@ -36,7 +36,7 @@ export default function Home({ location }) {
                     onToggleSidebar={() => setSidebarHidden(!sidebarHidden)}
                 />
                 {message && (
-                    <div className="flex py-2 px-4 my-4 mx-4 bg-blue-100 rounded border border-gray-600">
+                    <div className="flex py-2 px-4 my-4 mx-4 bg-blue-100 rounded border border-gray-600 dark:bg-trueGray-800 dark:border-blue-400">
                         <div className="flex-grow">{message}</div>
                         <CloseIcon
                             className="mb-auto cursor-pointer"

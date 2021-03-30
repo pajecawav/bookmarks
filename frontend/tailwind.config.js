@@ -18,18 +18,20 @@ module.exports = {
                 blueGray: colors.blueGray,
                 trueGray: colors.trueGray,
             },
-            fill: (theme) => ({
-                black: theme("colors.black"),
-                blue: theme("colors.blue.200"),
-            }),
-            stroke: (theme) => ({
-                blue: theme("colors.blue.500"),
-            }),
+            fill: {
+                black: colors.black,
+                blue: colors.blue,
+                trueGray: colors.trueGray,
+                white: colors.white,
+            },
+            stroke: {
+                blue: colors.blue,
+            },
         },
     },
     variants: {
         extend: {
-            fill: ["hover", "focus", "group-hover"],
+            fill: ["hover", "focus", "group-hover", "dark"],
             stroke: ["hover", "focus", "group-hover"],
         },
     },
