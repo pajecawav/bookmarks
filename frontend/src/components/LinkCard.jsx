@@ -73,6 +73,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                             .then(() => onUpdate(updatedLink))
                             .catch((e) => console.error(e));
                     }}
+                    title="Like link"
                 />
 
                 <ArchiveIcon
@@ -94,6 +95,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                             })
                             .catch((e) => console.error(e));
                     }}
+                    title="Archive link"
                 />
 
                 <EditIcon
@@ -102,6 +104,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                     onClick={() => {
                         onEdit(link);
                     }}
+                    title="Edit link"
                 />
 
                 <TrashIcon
@@ -112,6 +115,7 @@ export default function LinkCard({ link, onEdit, onRemove, onUpdate }) {
                             .then(() => onRemove(link))
                             .catch((e) => console.error(e));
                     }}
+                    title="Delete link"
                 />
 
                 {navigator.share && (

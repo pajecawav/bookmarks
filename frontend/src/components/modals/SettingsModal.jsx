@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { UserContext } from "../../contexts/UserContext";
 
-export default function SettingsModal({ isOpen, onClose }) {
+export default function SettingsModal({ isOpen, onClose, username }) {
     const { logout } = useContext(UserContext);
     const selfRef = useRef(null);
     const { theme, setTheme } = useContext(ThemeContext);
@@ -28,11 +28,13 @@ export default function SettingsModal({ isOpen, onClose }) {
     return (
         <div
             className={clsx(
-                "flex flex-col gap-2 absolute transition-opacity shadow-lg duration-200 top-10 right-2 py-3 text-xl mt-2 rounded-md bg-white ml-auto border-2 border-trueGray-300 dark:bg-trueGray-800 dark:border-trueGray-800",
+                "flex flex-col gap-2 absolute transition-opacity shadow-lg duration-200 top-12 right-2 py-3 text-lg mt-2 rounded-md bg-white ml-auto border-2 border-trueGray-300 dark:bg-trueGray-800 dark:border-trueGray-800",
                 isOpen ? "opacity-100" : "opacity-0"
             )}
             ref={selfRef}
         >
+            <div className="px-2 py-0.5">{username}</div>
+
             <button
                 className="px-2 py-0.5 w-full text-left duration-200 hover:bg-blue-200 dark:hover:bg-blue-400 dark:hover:text-gray-800"
                 onClick={logout}

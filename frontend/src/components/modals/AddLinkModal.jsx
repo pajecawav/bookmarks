@@ -53,7 +53,7 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                 <div className="flex justify-between pb-4 mb-4 w-full border-b-2 dark:border-trueGray-700">
                     <div className="text-xl font-bold">Add Link</div>
                     <CloseIcon
-                        className="cursor-pointer"
+                        className="rounded duration-200 cursor-pointer sm:w-7 sm:h-7 hover:stroke-blue-500"
                         onClick={onRequestClose}
                     />
                 </div>
