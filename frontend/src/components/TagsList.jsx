@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTags } from "../api";
 import { Tag } from "./LinkCard";
+import Input from "../ui/Input";
 
 export default function TagsList() {
     const [tags, setTags] = useState(null);
@@ -25,8 +26,8 @@ export default function TagsList() {
     return (
         <div className="px-4 my-6">
             <h1 className="text-xl font-medium">All Tags</h1>
-            <input
-                className="py-2 px-4 mt-4 w-full min-w-0 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+            <Input
+                className="mt-4 w-full min-w-0"
                 type="text"
                 placeholder="Filter tags"
                 value={query}

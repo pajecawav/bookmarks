@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { PinnedTagsContext } from "../contexts/PinnedTagsContext";
 import { ReactComponent as ArchiveIcon } from "../icons/archive.svg";
 import { ReactComponent as HeartIcon } from "../icons/heart.svg";
 import { ReactComponent as HomeIcon } from "../icons/home.svg";
 import { ReactComponent as SearchIcon } from "../icons/search.svg";
 import { ReactComponent as TagIcon } from "../icons/tag.svg";
+import NavigationLink from "../ui/NavigationLink";
 
 export default function Sidebar({ hidden }) {
     const { pinnedTags } = useContext(PinnedTagsContext);
@@ -23,60 +24,29 @@ export default function Sidebar({ hidden }) {
             </Link>
 
             <div className="flex flex-col gap-4">
-                <NavLink
-                    className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
-                    activeClassName="font-bold text-blue-500"
-                    exact
-                    to="/"
-                >
-                    <HomeIcon className="duration-200 group-hover:stroke-blue-500" />
-                    <div className="duration-200">My List</div>
-                </NavLink>
-                <NavLink
-                    className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
-                    activeClassName="font-bold text-blue-500"
-                    to="/liked"
-                >
-                    <HeartIcon className="duration-200 group-hover:stroke-blue-500" />
-                    <div className="duration-200">Liked</div>
-                </NavLink>
-                <NavLink
-                    className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
-                    activeClassName="font-bold text-blue-500"
+                <NavigationLink exact to="/" icon={HomeIcon} text="My List" />
+                <NavigationLink to="/liked" icon={HeartIcon} text="Liked" />
+                <NavigationLink
                     to="/archived"
-                >
-                    <ArchiveIcon className="duration-200 group-hover:stroke-blue-500" />
-                    <div className="duration-200">Archive</div>
-                </NavLink>
-                <NavLink
-                    className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
-                    activeClassName="font-bold text-blue-500"
-                    to="/search"
-                >
-                    <SearchIcon className="duration-200 group-hover:stroke-blue-500" />
-                    <div className="duration-200">Search</div>
-                </NavLink>
+                    icon={ArchiveIcon}
+                    text="Archived"
+                />
+                <NavigationLink to="/search" icon={SearchIcon} text="Search" />
 
                 <div className="flex flex-col gap-2">
                     <div className="mt-2 text-gray-600">Tags</div>
-                    <NavLink
-                        className="flex gap-3 items-center cursor-pointer group hover:text-blue-500"
-                        activeClassName="font-bold text-blue-500"
-                        to="/tags"
+                    <NavigationLink
                         exact
-                    >
-                        <TagIcon className="duration-200 group-hover:stroke-blue-500" />
-                        <div className="duration-200">All Tags</div>
-                    </NavLink>
+                        to="/tags"
+                        icon={TagIcon}
+                        text="Tags"
+                    />
                     {pinnedTags.map((tag) => (
-                        <NavLink
-                            className="duration-200 cursor-pointer hover:text-blue-500"
-                            activeClassName="font-bold text-blue-500"
+                        <NavigationLink
                             to={`/tags/${tag}`}
+                            text={tag}
                             key={tag}
-                        >
-                            {tag}
-                        </NavLink>
+                        />
                     ))}
                 </div>
             </div>

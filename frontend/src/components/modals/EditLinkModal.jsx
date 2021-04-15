@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { updateLink } from "../../api";
 import { ReactComponent as CloseIcon } from "../../icons/close.svg";
+import Button from "../../ui/Button";
+import Input from "../../ui/Input";
 import TagsInput from "./../TagsInput";
 
 const customStyles = {
@@ -36,6 +38,8 @@ export default function EditLinkModal({
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log(event.target);
+
         const data = new FormData(event.target);
         await updateLink(link.id, {
             title: data.get("title"),
@@ -74,8 +78,8 @@ export default function EditLinkModal({
                         >
                             Title
                         </label>
-                        <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                        <Input
+                            className="flex-grow"
                             type="text"
                             name="title"
                             defaultValue={link?.title}
@@ -91,8 +95,8 @@ export default function EditLinkModal({
                         >
                             URL
                         </label>
-                        <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                        <Input
+                            className="flex-grow"
                             type="url"
                             name="url"
                             defaultValue={link?.url}
@@ -122,11 +126,7 @@ export default function EditLinkModal({
                         </div>
                     ))}
 
-                    <input
-                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-200 cursor-pointer hover:bg-blue-500 dark:bg-trueGray-800 dark:hover:bg-blue-400 dark:hover:text-gray-800 hover:bg-blue-400"
-                        type="submit"
-                        value="Save"
-                    />
+                    <Button className="px-8 ml-auto w-max h-full">Save</Button>
                 </form>
             </div>
         </Modal>

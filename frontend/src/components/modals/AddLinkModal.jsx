@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "react-modal";
 import { addLink } from "../../api";
 import { ReactComponent as CloseIcon } from "../../icons/close.svg";
+import Button from "../../ui/Button";
+import Input from "../../ui/Input";
 
 const customStyles = {
     content: {
@@ -25,7 +27,7 @@ const customStyles = {
 export default function AddLinkModal({ onRequestClose, isOpen }) {
     const [errors, setErrors] = useState([]);
 
-    const submitHandler = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.target);
         addLink({
@@ -58,7 +60,7 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                     />
                 </div>
 
-                <form className="flex flex-col gap-4" onSubmit={submitHandler}>
+                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
                     <div className="flex items-center">
                         <label
                             className="inline-block flex-shrink-0 mr-4 w-8 text-gray-700 dark:text-current"
@@ -66,8 +68,8 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                         >
                             Title
                         </label>
-                        <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                        <Input
+                            className="flex-grow"
                             type="text"
                             name="add-title"
                             placeholder="Title (Optional)"
@@ -81,8 +83,8 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                         >
                             URL
                         </label>
-                        <input
-                            className="flex-grow py-2 px-4 rounded border border-gray-400 focus:border-blue-500 dark:bg-trueGray-800 dark:text-white dark:border-trueGray-800 dark:placeholder-gray-500 dark:focus:border-blue-500"
+                        <Input
+                            className="flex-grow"
                             type="url"
                             name="add-url"
                             placeholder="Enter URL"
@@ -98,11 +100,7 @@ export default function AddLinkModal({ onRequestClose, isOpen }) {
                             {error}
                         </div>
                     ))}
-                    <input
-                        className="py-2 px-8 ml-auto w-max h-full text-white bg-gray-900 rounded duration-200 cursor-pointer hover:bg-blue-500 dark:bg-trueGray-800 dark:hover:bg-blue-400 dark:hover:text-gray-800 hover:bg-blue-400"
-                        type="submit"
-                        value="Add"
-                    />
+                    <Button className="px-8 ml-auto w-max h-full">Add</Button>
                 </form>
             </div>
         </Modal>
