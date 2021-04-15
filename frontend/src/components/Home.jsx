@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { ReactComponent as CloseIcon } from "../icons/close.svg";
 import { bigScreenMediaQuery } from "../utils";
-import MainContent from "./MainContent";
+import ContentRouter from "./ContentRouter";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
@@ -43,7 +43,7 @@ export default function Home({ location }) {
                         />
                     </div>
                 )}
-                <MainContent />
+                <ContentRouter />
             </div>
         </div>
     );

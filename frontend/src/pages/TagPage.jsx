@@ -1,10 +1,10 @@
+import clsx from "clsx";
 import { useContext, useState } from "react";
+import LinksList from "../components/LinksList";
 import { PinnedTagsContext } from "../contexts/PinnedTagsContext";
 import { ReactComponent as PinIcon } from "../icons/pin.svg";
-import LinksList from "./LinksList";
-import clsx from "clsx";
 
-export default function TagLinksList({ match, ...props }) {
+export default function TagPage({ match, ...props }) {
     const tag = match.params.tag;
     const { pinnedTags, setPinnedTags } = useContext(PinnedTagsContext);
     const [pinned, setPinned] = useState(pinnedTags.includes(tag));

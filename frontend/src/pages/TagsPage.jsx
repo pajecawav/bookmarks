@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTags } from "../api";
-import { Tag } from "./LinkCard";
+import { Tag } from "../components/LinkCard";
 import Input from "../ui/Input";
 
-export default function TagsList() {
+export default function TagsPage() {
     const [tags, setTags] = useState(null);
     const [query, setQuery] = useState("");
 

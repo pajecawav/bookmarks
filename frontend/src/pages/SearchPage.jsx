@@ -1,8 +1,8 @@
 import { useState } from "react";
-import LinksList from "./LinksList";
-import SearchBar from "./SearchBar";
+import LinksList from "../components/LinksList";
+import SearchBar from "../components/SearchBar";
 
-export default function SearchLinksList() {
+export default function SearchPage() {
     const [queryParams, setQueryParams] = useState({});
 
     return (

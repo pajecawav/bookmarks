@@ -24,12 +24,11 @@ export default function MainRouter() {
         <Router>
             <Switch>
                 <Route exact path="/login">
-                    {loggedIn === true && <Redirect to="/" />}
-                    {loggedIn === false && <Login />}
+                    {loggedIn ? <Redirect to="/" /> : <Login />}
                 </Route>
-                {loggedIn === false && <Redirect to="/login" />}
-                <Route path="/_share" component={ShareTarget}></Route>
-                <Route component={Home}></Route>
+                {!loggedIn && <Redirect to="/login" />}
+                <Route path="/_share" component={ShareTarget} />
+                <Route component={Home} />
             </Switch>
         </Router>
     );
