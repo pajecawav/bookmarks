@@ -10,7 +10,7 @@ It uses [FastAPI](https://github.com/tiangolo/fastapi) for backend and [React](h
 
 1.  Install [Docker Compose](https://docs.docker.com/compose/install/)
 
-1.  Run `docker-compose up -d`
+1.  Run `docker-compose -f docker-compose.yml up -d --build`
 
 1.  Navigate to `http://localhost:3000`.
 
@@ -47,6 +47,7 @@ It uses [FastAPI](https://github.com/tiangolo/fastapi) for backend and [React](h
 1.  Initialize database
 
     ```bash
+    alembic upgrade head
     python -m app.db.init_db
     ```
 
@@ -61,8 +62,6 @@ It uses [FastAPI](https://github.com/tiangolo/fastapi) for backend and [React](h
     ```bash
     npm install
     ```
-
-# Usage
 
 1.  From `backend` folder spawn shell within the virtual environment and start [uvicorn](https://github.com/encode/uvicorn) server
 
